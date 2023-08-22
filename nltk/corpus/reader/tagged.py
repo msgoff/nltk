@@ -146,7 +146,10 @@ class TaggedCorpusReader(CorpusReader):
         :rtype: list(tuple(str,str))
         """
         if tagset and tagset != self._tagset:
-            tag_mapping_function = lambda t: map_tag(self._tagset, tagset, t)
+
+            def tag_mapping_function(t):
+                return map_tag(self._tagset, tagset, t)
+
         else:
             tag_mapping_function = None
         return concat(
@@ -175,7 +178,10 @@ class TaggedCorpusReader(CorpusReader):
         :rtype: list(list(tuple(str,str)))
         """
         if tagset and tagset != self._tagset:
-            tag_mapping_function = lambda t: map_tag(self._tagset, tagset, t)
+
+            def tag_mapping_function(t):
+                return map_tag(self._tagset, tagset, t)
+
         else:
             tag_mapping_function = None
         return concat(
@@ -204,7 +210,10 @@ class TaggedCorpusReader(CorpusReader):
         :rtype: list(list(list(tuple(str,str))))
         """
         if tagset and tagset != self._tagset:
-            tag_mapping_function = lambda t: map_tag(self._tagset, tagset, t)
+
+            def tag_mapping_function(t):
+                return map_tag(self._tagset, tagset, t)
+
         else:
             tag_mapping_function = None
         return concat(

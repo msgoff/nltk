@@ -126,10 +126,12 @@ class KMeansClusterer(VectorSpaceClusterer):
                 # for i in range(self._num_means):
                 # print '  mean', i, 'allocated', len(clusters[i]), 'vectors'
 
-                # recalculate cluster means by computing the centroid of each cluster
+                # recalculate cluster means by computing the centroid of each
+                # cluster
                 new_means = list(map(self._centroid, clusters, self._means))
 
-                # measure the degree of change from the previous step for convergence
+                # measure the degree of change from the previous step for
+                # convergence
                 difference = self._sum_distances(self._means, new_means)
                 if difference < self._max_difference:
                     converged = True
@@ -188,7 +190,7 @@ class KMeansClusterer(VectorSpaceClusterer):
         return "<KMeansClusterer means=%s repeats=%d>" % (self._means, self._repeats)
 
 
-#################################################################################
+##########################################################################
 
 
 def demo():

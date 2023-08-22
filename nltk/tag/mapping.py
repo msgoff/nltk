@@ -51,7 +51,8 @@ _UNIVERSAL_TAGS = (
 )
 
 # _MAPPINGS = defaultdict(lambda: defaultdict(dict))
-# the mapping between tagset T1 and T2 returns UNK if applied to an unrecognized tag
+# the mapping between tagset T1 and T2 returns UNK if applied to an
+# unrecognized tag
 _MAPPINGS = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: "UNK")))
 
 

@@ -548,13 +548,15 @@ def find_file_iter(
                 yield os.environ[env_var]
 
             for env_dir in os.environ[env_var].split(os.pathsep):
-                # Check if the environment variable contains a direct path to the bin
+                # Check if the environment variable contains a direct path to
+                # the bin
                 if os.path.isfile(env_dir):
                     if verbose:
                         print(f"[Found {filename}: {env_dir}]")
                     yielded = True
                     yield env_dir
-                # Check if the possible bin names exist inside the environment variable directories
+                # Check if the possible bin names exist inside the environment
+                # variable directories
                 for alternative in file_names:
                     path_to_file = os.path.join(env_dir, alternative)
                     if os.path.isfile(path_to_file):
@@ -740,7 +742,8 @@ def find_jar_iter(
                                 print(f"[Found {name_pattern}: {cp}]")
                             yielded = True
                             yield cp
-                    # The case where user put directory containing the jar file in the classpath
+                    # The case where user put directory containing the jar file
+                    # in the classpath
                     if os.path.isdir(cp):
                         if not is_regex:
                             if os.path.isfile(os.path.join(cp, name_pattern)):
@@ -930,9 +933,9 @@ class ElementWrapper:
         """
         return self._etree
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { String Representation
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     def __repr__(self):
         s = ElementTree.tostring(self._etree, encoding="utf8").decode("utf8")
@@ -952,9 +955,9 @@ class ElementWrapper:
             ElementTree.tostring(self._etree, encoding="utf8").decode("utf8").rstrip()
         )
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { Element interface Delegation (pass-through)
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     def __getattr__(self, attrib):
         return getattr(self._etree, attrib)
@@ -980,9 +983,9 @@ class ElementWrapper:
     def __len__(self):
         return len(self._etree)
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { Element interface Delegation (wrap result)
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     def __getitem__(self, index):
         return ElementWrapper(self._etree[index])

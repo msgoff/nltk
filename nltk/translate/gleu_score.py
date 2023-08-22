@@ -158,7 +158,8 @@ def corpus_gleu(list_of_references, hypotheses, min_len=1, max_len=4):
         hyp_counts = []
         for reference in references:
             ref_ngrams = Counter(everygrams(reference, min_len, max_len))
-            tpfn = sum(ref_ngrams.values())  # True positives + False negatives.
+            # True positives + False negatives.
+            tpfn = sum(ref_ngrams.values())
 
             overlap_ngrams = ref_ngrams & hyp_ngrams
             tp = sum(overlap_ngrams.values())  # True positives.

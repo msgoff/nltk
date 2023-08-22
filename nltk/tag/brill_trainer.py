@@ -235,7 +235,8 @@ class BrillTaggerTrainer:
         :rtype: BrillTagger
         """
         # FIXME: several tests are a bit too dependent on tracing format
-        # FIXME: tests in trainer.fast and trainer.brillorig are exact duplicates
+        # FIXME: tests in trainer.fast and trainer.brillorig are exact
+        # duplicates
 
         # Basic idea: Keep track of the rules that apply at each position.
         # And keep track of the positions to which each rule applies.
@@ -458,7 +459,8 @@ class BrillTaggerTrainer:
 
                 if self._rule_scores[rule] == max_score:
                     self._first_unknown_position[rule] = (len(train_sents) + 1, 0)
-                    # optimization: if no min_acc threshold given, don't bother computing accuracy
+                    # optimization: if no min_acc threshold given, don't bother
+                    # computing accuracy
                     if min_acc is None:
                         return rule
                     else:

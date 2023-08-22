@@ -350,7 +350,8 @@ class ConcordanceSearchView:
         vscrollbar.config(command=self.results_box.yview)
         hscrollbar.pack(side="left", fill="x", expand=True, anchor="w")
         hscrollbar.config(command=self.results_box.xview)
-        # there is no other way of avoiding the overlap of scrollbars while using pack layout manager!!!
+        # there is no other way of avoiding the overlap of scrollbars while
+        # using pack layout manager!!!
         Label(i2, text="   ", background=self._BACKGROUND_COLOUR).pack(
             side="left", anchor="e"
         )
@@ -400,7 +401,7 @@ class ConcordanceSearchView:
             from tkinter.messagebox import Message
 
             Message(message=ABOUT, title=TITLE, parent=self.main_frame).show()
-        except:
+        except BaseException:
             ShowText(self.top, TITLE, ABOUT)
 
     def _bind_event_handlers(self):
@@ -569,7 +570,8 @@ class ConcordanceSearchView:
             self.next["state"] = "disabled"
 
     def fire_event(self, event):
-        # Firing an event so that rendering of widgets happen in the mainloop thread
+        # Firing an event so that rendering of widgets happen in the mainloop
+        # thread
         self.top.event_generate(event, when="tail")
 
     def mainloop(self, *args, **kwargs):

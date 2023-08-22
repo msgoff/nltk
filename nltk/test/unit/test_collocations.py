@@ -1,7 +1,7 @@
 from nltk.collocations import BigramCollocationFinder
 from nltk.metrics import BigramAssocMeasures
 
-## Test bigram counters with discontinuous bigrams and repeated words
+# Test bigram counters with discontinuous bigrams and repeated words
 
 _EPSILON = 1e-8
 SENT = "this this is is a a test test".split()

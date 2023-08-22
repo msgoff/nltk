@@ -315,7 +315,8 @@ class ApplicationExpression(Expression):
 
         # If you are running it on complied premises, more conditions apply
         if argument_indices:
-            # A.dependencies of (A -o (B -o C)) must be a proper subset of argument_indices
+            # A.dependencies of (A -o (B -o C)) must be a proper subset of
+            # argument_indices
             if not set(function_simp.antecedent.dependencies) < argument_indices:
                 raise LinearLogicApplicationException(
                     "Dependencies unfulfilled when attempting to apply Linear Logic formula %s to %s"

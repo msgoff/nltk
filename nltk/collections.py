@@ -231,13 +231,13 @@ class AbstractLazySequence:
         return "[%s]" % ", ".join(pieces)
 
     def __eq__(self, other):
-        return type(self) == type(other) and list(self) == list(other)
+        return isinstance(self, type(other)) and list(self) == list(other)
 
     def __ne__(self, other):
         return not self == other
 
     def __lt__(self, other):
-        if type(other) != type(self):
+        if not isinstance(other, type(self)):
             raise_unorderable_types("<", self, other)
         return list(self) < list(other)
 
@@ -422,7 +422,9 @@ class LazyMap(AbstractLazySequence):
                 for iterator in iterators:
                     try:
                         elements.append(next(iterator))
-                    except:  # FIXME: What is this except really catching? StopIteration?
+                    except (
+                        BaseException
+                    ):  # FIXME: What is this except really catching? StopIteration?
                         elements.append(None)
                 if elements == [None] * len(self._lists):
                     return

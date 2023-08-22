@@ -535,7 +535,7 @@ class CFGEditor:
     def _cancel(self, *e):
         try:
             self._reset()
-        except:
+        except BaseException:
             pass
         self._destroy()
 
@@ -549,7 +549,7 @@ class CFGEditor:
                 width=75,
                 font="fixed",
             )
-        except:
+        except BaseException:
             ShowText(
                 self._parent,
                 "Help: Chart Parser Demo",

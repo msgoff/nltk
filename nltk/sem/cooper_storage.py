@@ -36,7 +36,10 @@ class CooperStore:
         :type lst: list
         :rtype: iter
         """
-        remove = lambda lst0, index: lst0[:index] + lst0[index + 1 :]
+
+        def remove(lst0, index):
+            return lst0[:index] + lst0[index + 1 :]
+
         if lst:
             for index, x in enumerate(lst):
                 for y in self._permute(remove(lst, index)):
@@ -64,7 +67,8 @@ class CooperStore:
                 print("Permutation %s" % (perm + 1))
             term = self.core
             for bindop in store_perm:
-                # we just want the arguments that are wrapped by the 'bo' predicate
+                # we just want the arguments that are wrapped by the 'bo'
+                # predicate
                 quant, varex = tuple(bindop.args)
                 # use var to make an abstraction over the current term and then
                 # apply the quantifier to it

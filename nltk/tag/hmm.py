@@ -1088,7 +1088,9 @@ class HiddenMarkovModelTrainer:
 
         # default to the MLE estimate
         if estimator is None:
-            estimator = lambda fdist, bins: MLEProbDist(fdist)
+
+            def estimator(fdist, bins):
+                return MLEProbDist(fdist)
 
         # count occurrences of starting states, transitions out of each state
         # and output symbols observed in each state

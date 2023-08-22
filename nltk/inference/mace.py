@@ -68,7 +68,8 @@ class MaceCommand(Prover9CommandParent, BaseModelBuilderCommand):
                 num_entities = int(l[l.index("(") + 1 : l.index(",")].strip())
 
             elif l.startswith("function") and l.find("_") == -1:
-                # replace the integer identifier with a corresponding alphabetic character
+                # replace the integer identifier with a corresponding
+                # alphabetic character
                 name = l[l.index("(") + 1 : l.index(",")].strip()
                 if is_indvar(name):
                     name = name.upper()

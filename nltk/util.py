@@ -152,7 +152,7 @@ class Index(defaultdict):
 
 
 ######################################################################
-## Regexp display (thanks to David Mertz)
+# Regexp display (thanks to David Mertz)
 ######################################################################
 
 
@@ -651,7 +651,8 @@ def guess_encoding(data):
 
 def unique_list(xs):
     seen = set()
-    # not seen.add(x) here acts to make the code shorter without using if statements, seen.add(x) always returns None.
+    # not seen.add(x) here acts to make the code shorter without using if
+    # statements, seen.add(x) always returns None.
     return [x for x in xs if x not in seen and not seen.add(x)]
 
 
@@ -692,9 +693,15 @@ def transitive_closure(graph, reflexive=False):
     :rtype: dict(set)
     """
     if reflexive:
-        base_set = lambda k: {k}
+
+        def base_set(k):
+            return {k}
+
     else:
-        base_set = lambda k: set()
+
+        def base_set(k):
+            return set()
+
     # The graph U_i in the article:
     agenda_graph = {k: graph[k].copy() for k in graph}
     # The graph M_i in the article:

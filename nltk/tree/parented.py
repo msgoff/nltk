@@ -16,7 +16,7 @@ from nltk.util import slice_bounds
 
 
 ######################################################################
-## Parented trees
+# Parented trees
 ######################################################################
 class AbstractParentedTree(Tree, metaclass=ABCMeta):
     """

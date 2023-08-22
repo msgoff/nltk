@@ -523,8 +523,10 @@ def default_reasoning_demo():
 
     # specify abnormal entities
     premises.append(lexpr(r"all x.(bird(x)           -> Ab1(x))"))  # flight
-    premises.append(lexpr(r"all x.(ostrich(x)        -> Ab2(x))"))  # non-flying bird
-    premises.append(lexpr(r"all x.(flying_ostrich(x) -> Ab3(x))"))  # flying ostrich
+    # non-flying bird
+    premises.append(lexpr(r"all x.(ostrich(x)        -> Ab2(x))"))
+    # flying ostrich
+    premises.append(lexpr(r"all x.(flying_ostrich(x) -> Ab3(x))"))
 
     # define entities
     premises.append(lexpr(r"elephant(E)"))

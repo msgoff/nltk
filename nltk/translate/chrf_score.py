@@ -99,7 +99,7 @@ def sentence_chrf(
 
 
 def _preprocess(sent, ignore_whitespace):
-    if type(sent) != str:
+    if not isinstance(sent, str):
         # turn list of tokens into a string
         sent = " ".join(sent)
 

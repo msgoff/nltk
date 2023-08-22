@@ -1153,11 +1153,11 @@ def demo():
         for synset in wordnet.synsets(word):
             try:
                 hyper_def = synset.hypernyms()[0].definition()
-            except:
+            except BaseException:
                 hyper_def = "*none*"
             try:
                 hypo_def = synset.hypernyms()[0].definition()
-            except:
+            except BaseException:
                 hypo_def = "*none*"
             table.append([word, synset.definition(), hyper_def, hypo_def])
 

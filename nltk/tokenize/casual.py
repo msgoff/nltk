@@ -280,7 +280,8 @@ def _replace_html_entities(text, keep=(), remove_illegal=True, encoding="utf-8")
                 # Numeric character references in the 80-9F range are typically
                 # interpreted by browsers as representing the characters mapped
                 # to bytes 80-9F in the Windows-1252 encoding. For more info
-                # see: https://en.wikipedia.org/wiki/ISO/IEC_8859-1#Similar_character_sets
+                # see:
+                # https://en.wikipedia.org/wiki/ISO/IEC_8859-1#Similar_character_sets
                 if 0x80 <= number <= 0x9F:
                     return bytes((number,)).decode("cp1252")
             except ValueError:
@@ -380,7 +381,8 @@ class TweetTokenizer(TokenizerI):
             words = self.PHONE_WORD_RE.findall(safe_text)
         else:
             words = self.WORD_RE.findall(safe_text)
-        # Possibly alter the case, but avoid changing emoticons like :D into :d:
+        # Possibly alter the case, but avoid changing emoticons like :D into
+        # :d:
         if not self.preserve_case:
             words = list(
                 map((lambda x: x if EMOTICON_RE.search(x) else x.lower()), words)
@@ -390,7 +392,8 @@ class TweetTokenizer(TokenizerI):
     @property
     def WORD_RE(self) -> "regex.Pattern":
         """Core TweetTokenizer regex"""
-        # Compiles the regex for this and all future instantiations of TweetTokenizer.
+        # Compiles the regex for this and all future instantiations of
+        # TweetTokenizer.
         if not type(self)._WORD_RE:
             type(self)._WORD_RE = regex.compile(
                 f"({'|'.join(REGEXPS)})",
@@ -401,7 +404,8 @@ class TweetTokenizer(TokenizerI):
     @property
     def PHONE_WORD_RE(self) -> "regex.Pattern":
         """Secondary core TweetTokenizer regex"""
-        # Compiles the regex for this and all future instantiations of TweetTokenizer.
+        # Compiles the regex for this and all future instantiations of
+        # TweetTokenizer.
         if not type(self)._PHONE_WORD_RE:
             type(self)._PHONE_WORD_RE = regex.compile(
                 f"({'|'.join(REGEXPS_PHONE)})",
@@ -428,7 +432,8 @@ def remove_handles(text):
     """
     Remove Twitter username handles from text.
     """
-    # Substitute handles with ' ' to ensure that text on either side of removed handles are tokenized correctly
+    # Substitute handles with ' ' to ensure that text on either side of
+    # removed handles are tokenized correctly
     return HANDLES_RE.sub(" ", text)
 
 

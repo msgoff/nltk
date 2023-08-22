@@ -18,7 +18,7 @@ import codecs
 from nltk.sem import evaluate
 
 ##############################################################
-## Utility functions for connecting parse output to semantics
+# Utility functions for connecting parse output to semantics
 ##############################################################
 
 

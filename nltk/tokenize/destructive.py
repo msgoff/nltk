@@ -100,7 +100,8 @@ class NLTKWordTokenizer(TokenizerI):
     # Pads parentheses
     PARENS_BRACKETS = (re.compile(r"[\]\[\(\)\{\}\<\>]"), r" \g<0> ")
 
-    # Optionally: Convert parentheses, brackets and converts them to PTB symbols.
+    # Optionally: Convert parentheses, brackets and converts them to PTB
+    # symbols.
     CONVERT_PARENTHESES = [
         (re.compile(r"\("), "-LRB-"),
         (re.compile(r"\)"), "-RRB-"),

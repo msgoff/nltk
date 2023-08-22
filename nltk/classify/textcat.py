@@ -40,7 +40,7 @@ try:
 except ImportError:
     re = None
 ######################################################################
-##  Language identification using TextCat
+# Language identification using TextCat
 ######################################################################
 
 
@@ -137,7 +137,7 @@ class TextCat:
         self.last_distances = self.lang_dists(text)
 
         return min(self.last_distances, key=self.last_distances.get)
-        #################################################')
+        # ')
 
 
 def demo():

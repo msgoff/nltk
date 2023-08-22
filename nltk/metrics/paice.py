@@ -276,7 +276,8 @@ class Paice:
         words = get_words_from_dictionary(self.lemmas)
         maxlength = max(len(word) for word in words)
 
-        # Truncate words from different points until (0, 0) - (ui, oi) segment crosses the truncation line
+        # Truncate words from different points until (0, 0) - (ui, oi) segment
+        # crosses the truncation line
         coords = []
         while cutlength <= maxlength:
             # Get (UI, OI) pair of current truncation point
@@ -295,7 +296,8 @@ class Paice:
                 derivative2 = _get_derivative(coords[-1])
                 # Derivative of the truncation line is a decreasing value;
                 # when it passes Stemming Weight, we've found the segment
-                # of truncation line intersecting with (0, 0) - (ui, oi) segment
+                # of truncation line intersecting with (0, 0) - (ui, oi)
+                # segment
                 if derivative1 >= self.sw >= derivative2:
                     return coords
             cutlength += 1
@@ -309,7 +311,8 @@ class Paice:
         line when extended until the truncation line.
         :rtype: float
         """
-        # Count (UI, OI) pairs for truncation points until we find the segment where (ui, oi) crosses the truncation line
+        # Count (UI, OI) pairs for truncation points until we find the segment
+        # where (ui, oi) crosses the truncation line
         self.coords = self._get_truncation_coordinates()
         if (0.0, 0.0) in self.coords:
             # Truncation line goes through origo, so ERRT cannot be counted
@@ -328,9 +331,11 @@ class Paice:
         )
         # Count OP (length of the line from origo to (ui, oi))
         op = sqrt(self.ui**2 + self.oi**2)
-        # Count OT (length of the line from origo to truncation line that goes through (ui, oi))
+        # Count OT (length of the line from origo to truncation line that goes
+        # through (ui, oi))
         ot = sqrt(intersection[0] ** 2 + intersection[1] ** 2)
-        # OP / OT tells how well the stemming algorithm works compared to just truncating words
+        # OP / OT tells how well the stemming algorithm works compared to just
+        # truncating words
         return op / ot
 
     def update(self):

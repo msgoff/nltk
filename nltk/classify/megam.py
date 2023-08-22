@@ -99,7 +99,8 @@ def write_megam_file(train_toks, encoding, stream, bernoulli=True, explicit=True
 
     # Write the file, which contains one line per instance.
     for featureset, label in train_toks:
-        # First, the instance number (or, in the weighted multiclass case, the cost of each label).
+        # First, the instance number (or, in the weighted multiclass case, the
+        # cost of each label).
         if hasattr(encoding, "cost"):
             stream.write(
                 ":".join(str(encoding.cost(featureset, label, l)) for l in labels)

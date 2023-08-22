@@ -65,7 +65,8 @@ class StandardFormat:
         # need to get first line outside the loop for correct handling
         # of the first marker if it spans multiple lines
         file_iter = iter(self._file)
-        # PEP 479, prevent RuntimeError when StopIteration is raised inside generator
+        # PEP 479, prevent RuntimeError when StopIteration is raised inside
+        # generator
         try:
             line = next(file_iter)
         except StopIteration:

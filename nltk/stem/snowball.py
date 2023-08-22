@@ -327,19 +327,19 @@ class ArabicStemmer(_StandardStemmer):
 
     __kasheeda = re.compile(r"[\u0640]")  # ـ tatweel/kasheeda
 
-    __arabic_punctuation_marks = re.compile(r"[\u060C-\u061B-\u061F]")  #  ؛ ، ؟
+    __arabic_punctuation_marks = re.compile(r"[\u060C-\u061B-\u061F]")  # ؛ ، ؟
 
     # Normalize_post
     __last_hamzat = ("\u0623", "\u0625", "\u0622", "\u0624", "\u0626")  # أ، إ، آ، ؤ، ئ
 
     # normalize other hamza's
-    __initial_hamzat = re.compile(r"^[\u0622\u0623\u0625]")  #  أ، إ، آ
+    __initial_hamzat = re.compile(r"^[\u0622\u0623\u0625]")  # أ، إ، آ
 
     __waw_hamza = re.compile(r"[\u0624]")  # ؤ
 
     __yeh_hamza = re.compile(r"[\u0626]")  # ئ
 
-    __alefat = re.compile(r"[\u0623\u0622\u0625]")  #  أ، إ، آ
+    __alefat = re.compile(r"[\u0623\u0622\u0625]")  # أ، إ، آ
 
     # Checks
     __checks1 = (
@@ -4004,7 +4004,7 @@ class PortugueseStemmer(_StandardStemmer):
                 word = word[:-1]
                 rv = rv[:-1]
 
-        ### STEP 4: Residual suffix
+        # STEP 4: Residual suffix
         if not step1_success and not step2_success:
             for suffix in self.__step4_suffixes:
                 if rv.endswith(suffix):

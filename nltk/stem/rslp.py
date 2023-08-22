@@ -68,7 +68,8 @@ class RSLPStemmer(StemmerI):
         lines = [line for line in lines if line != ""]  # remove blank lines
         lines = [line for line in lines if line[0] != "#"]  # remove comments
 
-        # NOTE: a simple but ugly hack to make this parser happy with double '\t's
+        # NOTE: a simple but ugly hack to make this parser happy with double
+        # '\t's
         lines = [line.replace("\t\t", "\t") for line in lines]
 
         # parse rules

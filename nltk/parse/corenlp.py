@@ -770,7 +770,8 @@ class CoreNLPDependencyParser(GenericCoreNLPParser):
                 " ".join(n_items[1:])  # NLTK expects an iterable of strings...
                 for n_items in sorted(transform(result))
             ),
-            cell_separator=" ",  # To make sure that a non-breaking space is kept inside of a token.
+            cell_separator=" ",
+            # To make sure that a non-breaking space is kept inside of a token.
         )
 
 

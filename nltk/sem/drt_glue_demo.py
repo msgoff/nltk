@@ -63,7 +63,7 @@ class DrtGlueDemo:
         self._canvas.bind("<Configure>", self._configure)
 
     #########################################
-    ##  Initialization Helpers
+    # Initialization Helpers
     #########################################
 
     def _init_glue(self):
@@ -301,7 +301,7 @@ class DrtGlueDemo:
         parent.config(menu=menubar)
 
     #########################################
-    ##  Main draw procedure
+    # Main draw procedure
     #########################################
 
     def _redraw(self):
@@ -320,7 +320,7 @@ class DrtGlueDemo:
             self._drsWidget.draw()
 
     #########################################
-    ##  Button Callbacks
+    # Button Callbacks
     #########################################
 
     def destroy(self, *e):
@@ -402,7 +402,7 @@ class DrtGlueDemo:
             from tkinter.messagebox import Message
 
             Message(message=ABOUT, title=TITLE).show()
-        except:
+        except BaseException:
             ShowText(self._top, TITLE, ABOUT)
 
     def postscript(self, *e):

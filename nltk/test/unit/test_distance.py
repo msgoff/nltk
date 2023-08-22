@@ -51,9 +51,11 @@ class TestEditDistance:
             # e.g. "lnaguaeg" -T-> "languaeg" -T-> "language": 2 steps
             #
             # without transpositions:
-            # e.g. "lnaguaeg" -D-> "laguaeg" -I-> "languaeg" -D-> "languag" -I-> "language": 4 steps
+            # e.g. "lnaguaeg" -D-> "laguaeg" -I-> "languaeg" -D-> "languag"
+            # -I-> "language": 4 steps
             ("lnaguaeg", "language", 1, (2, 4)),
-            ("lnaguaeg", "language", 2, (2, 4)),  # Doesn't *require* substitutions
+            # Doesn't *require* substitutions
+            ("lnaguaeg", "language", 2, (2, 4)),
             #
             #
             # with transpositions:

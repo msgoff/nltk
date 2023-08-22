@@ -124,7 +124,7 @@ class RecursiveDescentApp:
         self._canvas.bind("<Configure>", self._configure)
 
     #########################################
-    ##  Initialization Helpers
+    # Initialization Helpers
     #########################################
 
     def _init_fonts(self, root):
@@ -440,7 +440,7 @@ class RecursiveDescentApp:
         parent.config(menu=menubar)
 
     #########################################
-    ##  Helper
+    # Helper
     #########################################
 
     def _get(self, widget, treeloc):
@@ -451,7 +451,7 @@ class RecursiveDescentApp:
         return widget
 
     #########################################
-    ##  Main draw procedure
+    # Main draw procedure
     #########################################
 
     def _redraw(self):
@@ -578,7 +578,7 @@ class RecursiveDescentApp:
             return [tree]
 
     #########################################
-    ##  Button Callbacks
+    # Button Callbacks
     #########################################
 
     def destroy(self, *e):
@@ -708,7 +708,7 @@ class RecursiveDescentApp:
             from tkinter.messagebox import Message
 
             Message(message=ABOUT, title=TITLE).show()
-        except:
+        except BaseException:
             ShowText(self._top, TITLE, ABOUT)
 
     def help(self, *e):
@@ -722,7 +722,7 @@ class RecursiveDescentApp:
                 width=75,
                 font="fixed",
             )
-        except:
+        except BaseException:
             ShowText(
                 self._top,
                 "Help: Recursive Descent Parser Application",
@@ -756,7 +756,7 @@ class RecursiveDescentApp:
         self._redraw()
 
     #########################################
-    ##  Expand Production Selection
+    # Expand Production Selection
     #########################################
 
     def _toggle_grammar(self, *e):
@@ -803,7 +803,7 @@ class RecursiveDescentApp:
                 self._prodlist.selection_set(index)
 
     #########################################
-    ##  Animation
+    # Animation
     #########################################
 
     def _animate_expand(self, treeloc):

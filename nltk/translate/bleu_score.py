@@ -188,8 +188,10 @@ def corpus_bleu(
     """
     # Before proceeding to compute BLEU, perform sanity checks.
 
-    p_numerators = Counter()  # Key = ngram order, and value = no. of ngram matches.
-    p_denominators = Counter()  # Key = ngram order, and value = no. of ngram in ref.
+    # Key = ngram order, and value = no. of ngram matches.
+    p_numerators = Counter()
+    # Key = ngram order, and value = no. of ngram in ref.
+    p_denominators = Counter()
     hyp_lengths, ref_lengths = 0, 0
 
     assert len(list_of_references) == len(hypotheses), (

@@ -405,8 +405,7 @@ class _Hypothesis:
 
         :rtype: list(tuple(int, int))
         """
-        translated_positions = self.translated_positions()
-        translated_positions.sort()
+        translated_positions = sorted(self.translated_positions())
         translated_positions.append(sentence_length)  # add sentinel position
 
         untranslated_spans = []

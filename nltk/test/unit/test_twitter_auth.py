@@ -2,13 +2,12 @@
 Tests for static parts of Twitter package
 """
 
+from nltk.twitter import Authenticate
 import os
 
 import pytest
 
 pytest.importorskip("twython")
-
-from nltk.twitter import Authenticate
 
 
 @pytest.fixture

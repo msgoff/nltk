@@ -15,7 +15,7 @@ from nltk.tree.immutable import ImmutableProbabilisticTree
 from nltk.tree.tree import Tree
 
 ######################################################################
-## Probabilistic trees
+# Probabilistic trees
 ######################################################################
 
 

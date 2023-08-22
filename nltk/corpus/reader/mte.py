@@ -200,7 +200,7 @@ class MTETagConverter:
         """
         indicator = tag[0] if not tag[0] == "#" else tag[1]
 
-        if not indicator in MTETagConverter.mapping_msd_universal:
+        if indicator not in MTETagConverter.mapping_msd_universal:
             indicator = "-"
 
         return MTETagConverter.mapping_msd_universal[indicator]
@@ -235,7 +235,8 @@ class MTECorpusReader(TaggedCorpusReader):
             fileids = [fileids]
         # filter wrong userinput
         fileids = filter(lambda x: x in self._fileids, fileids)
-        # filter multext-east sourcefiles that are not compatible to the teip5 specification
+        # filter multext-east sourcefiles that are not compatible to the teip5
+        # specification
         fileids = filter(lambda x: x not in ["oana-bg.xml", "oana-mk.xml"], fileids)
         if not fileids:
             print("No valid multext-east file specified")

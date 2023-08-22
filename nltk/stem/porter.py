@@ -568,7 +568,9 @@ class PorterStemmer(StemmerI):
         The suffixes are now removed. All that remains is a little
         tidying up.
         """
-        measure_gt_1 = lambda stem: self._measure(stem) > 1
+
+        def measure_gt_1(stem):
+            return self._measure(stem) > 1
 
         return self._apply_rule_list(
             word,

@@ -35,7 +35,7 @@ class VaderConstants:
     A class to keep the Vader lists and constants.
     """
 
-    ##Constants##
+    ## Constants##
     # (empirically derived mean sentiment intensity rating increase for booster words)
     B_INCR = 0.293
     B_DECR = -0.293
@@ -180,7 +180,8 @@ class VaderConstants:
         "sort-of": B_DECR,
     }
 
-    # check for special case idioms using a sentiment-laden keyword known to SAGE
+    # check for special case idioms using a sentiment-laden keyword known to
+    # SAGE
     SPECIAL_CASE_IDIOMS = {
         "the shit": 3,
         "the bomb": 3,
@@ -251,7 +252,8 @@ class VaderConstants:
             scalar = self.BOOSTER_DICT[word_lower]
             if valence < 0:
                 scalar *= -1
-            # check if booster/dampener word is in ALLCAPS (while others aren't)
+            # check if booster/dampener word is in ALLCAPS (while others
+            # aren't)
             if word.isupper() and is_cap_diff:
                 if valence > 0:
                     scalar += self.C_INCR
@@ -393,7 +395,8 @@ class SentimentIntensityAnalyzer:
             # get the sentiment valence
             valence = self.lexicon[item_lowercase]
 
-            # check if sentiment laden word is in ALL CAPS (while others aren't)
+            # check if sentiment laden word is in ALL CAPS (while others
+            # aren't)
             if item.isupper() and is_cap_diff:
                 if valence > 0:
                     valence += self.constants.C_INCR
@@ -553,7 +556,8 @@ class SentimentIntensityAnalyzer:
         return punct_emph_amplifier
 
     def _amplify_ep(self, text):
-        # check for added emphasis resulting from exclamation points (up to 4 of them)
+        # check for added emphasis resulting from exclamation points (up to 4
+        # of them)
         ep_count = text.count("!")
         if ep_count > 4:
             ep_count = 4
@@ -604,7 +608,8 @@ class SentimentIntensityAnalyzer:
                 sum_s -= punct_emph_amplifier
 
             compound = self.constants.normalize(sum_s)
-            # discriminate between positive, negative and neutral sentiment scores
+            # discriminate between positive, negative and neutral sentiment
+            # scores
             pos_sum, neg_sum, neu_count = self._sift_sentiment_scores(sentiments)
 
             if pos_sum > math.fabs(neg_sum):

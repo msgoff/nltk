@@ -80,7 +80,8 @@ class DependencySpan:
 
     def __eq__(self, other):
         return (
-            type(self) == type(other) and self._comparison_key == other._comparison_key
+            isinstance(self, type(other))
+            and self._comparison_key == other._comparison_key
         )
 
     def __ne__(self, other):
@@ -207,7 +208,8 @@ class ProjectiveDependencyParser:
             for i in range(len(tokens)):
                 #                malt_format += '%s\t%s\t%d\t%s\n' % (tokens[i], 'null', parse._arcs[i] + 1, 'null')
                 # conll_format += '\t%d\t%s\t%s\t%s\t%s\t%s\t%d\t%s\t%s\t%s\n' % (i+1, tokens[i], tokens[i], 'null', 'null', 'null', parse._arcs[i] + 1, 'null', '-', '-')
-                # Modify to comply with the new Dependency Graph requirement (at least must have an root elements)
+                # Modify to comply with the new Dependency Graph requirement
+                # (at least must have an root elements)
                 conll_format += "\t%d\t%s\t%s\t%s\t%s\t%s\t%d\t%s\t%s\t%s\n" % (
                     i + 1,
                     tokens[i],
@@ -364,7 +366,8 @@ class ProbabilisticProjectiveDependencyParser:
                     "null",
                 )
                 # conll_format += '\t%d\t%s\t%s\t%s\t%s\t%s\t%d\t%s\t%s\t%s\n' % (i+1, tokens[i], tokens[i], parse._tags[i], parse._tags[i], 'null', parse._arcs[i] + 1, 'null', '-', '-')
-                # Modify to comply with recent change in dependency graph such that there must be a ROOT element.
+                # Modify to comply with recent change in dependency graph such
+                # that there must be a ROOT element.
                 conll_format += "\t%d\t%s\t%s\t%s\t%s\t%s\t%d\t%s\t%s\t%s\n" % (
                     i + 1,
                     tokens[i],

@@ -204,14 +204,16 @@ def word_rank_alignment(reference, hypothesis, character_based=False):
         else:
             max_window_size = max(i, hyp_len - i + 1)
             for window in range(1, max_window_size):
-                if i + window < hyp_len:  # If searching the right context is possible.
+                # If searching the right context is possible.
+                if i + window < hyp_len:
                     # Retrieve the right context window.
                     right_context_ngram = tuple(islice(hypothesis, i, i + window + 1))
                     num_times_in_ref = ref_ngrams.count(right_context_ngram)
                     num_times_in_hyp = hyp_ngrams.count(right_context_ngram)
                     # If ngram appears only once in both ref and hyp.
                     if num_times_in_ref == num_times_in_hyp == 1:
-                        # Find the position of ngram that matched the reference.
+                        # Find the position of ngram that matched the
+                        # reference.
                         pos = position_of_ngram(right_context_ngram, reference)
                         worder.append(pos)  # Add the positions of the ngram.
                         break
@@ -221,7 +223,8 @@ def word_rank_alignment(reference, hypothesis, character_based=False):
                     num_times_in_ref = ref_ngrams.count(left_context_ngram)
                     num_times_in_hyp = hyp_ngrams.count(left_context_ngram)
                     if num_times_in_ref == num_times_in_hyp == 1:
-                        # Find the position of ngram that matched the reference.
+                        # Find the position of ngram that matched the
+                        # reference.
                         pos = position_of_ngram(left_context_ngram, reference)
                         # Add the positions of the ngram.
                         worder.append(pos + len(left_context_ngram) - 1)

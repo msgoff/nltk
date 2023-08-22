@@ -6,7 +6,7 @@ from nltk.metrics import (
     TrigramAssocMeasures,
 )
 
-## Test the likelihood ratio metric
+# Test the likelihood ratio metric
 
 _DELTA = 1e-8
 

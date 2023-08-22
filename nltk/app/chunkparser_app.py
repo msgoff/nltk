@@ -53,9 +53,9 @@ class RegexpChunkApp:
     See ``HELP`` for instructional text.
     """
 
-    ##/////////////////////////////////////////////////////////////////
-    ##  Help Text
-    ##/////////////////////////////////////////////////////////////////
+    # /////////////////////////////////////////////////////////////////
+    # Help Text
+    # /////////////////////////////////////////////////////////////////
 
     #: A dictionary mapping from part of speech tags to descriptions,
     #: which is used in the help text.  (This should probably live with
@@ -231,9 +231,9 @@ class RegexpChunkApp:
         ("match", {"foreground": "#6a6"}),
     ]
 
-    ##/////////////////////////////////////////////////////////////////
-    ##  Config Parameters
-    ##/////////////////////////////////////////////////////////////////
+    # /////////////////////////////////////////////////////////////////
+    # Config Parameters
+    # /////////////////////////////////////////////////////////////////
 
     _EVAL_DELAY = 1
     """If the user has not pressed any key for this amount of time (in
@@ -1463,7 +1463,7 @@ class RegexpChunkApp:
             from tkinter.messagebox import Message
 
             Message(message=ABOUT, title=TITLE).show()
-        except:
+        except BaseException:
             ShowText(self.top, TITLE, ABOUT)
 
     def set_devset_size(self, size=None):

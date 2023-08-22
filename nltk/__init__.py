@@ -18,6 +18,11 @@ https://www.nltk.org/book/
 isort:skip_file
 """
 
+from nltk import tag, tbl, text, tokenize, translate, tree, util
+from nltk import misc, parse, probability, sem, stem, wsd
+from nltk import data, featstruct, grammar, help, inference, metrics
+from nltk import ccg, chunk, classify, collocations
+from nltk.downloader import download, download_shell
 import os
 
 # //////////////////////////////////////////////////////
@@ -177,7 +182,6 @@ except ImportError:
 else:
     from nltk import cluster
 
-from nltk.downloader import download, download_shell
 
 try:
     import tkinter
@@ -198,12 +202,8 @@ else:
 # they override the same names inadvertently imported
 # from a subpackage)
 
-from nltk import ccg, chunk, classify, collocations
-from nltk import data, featstruct, grammar, help, inference, metrics
-from nltk import misc, parse, probability, sem, stem, wsd
-from nltk import tag, tbl, text, tokenize, translate, tree, util
 
-
-# FIXME:  override any accidentally imported demo, see https://github.com/nltk/nltk/issues/2116
+# FIXME:  override any accidentally imported demo, see
+# https://github.com/nltk/nltk/issues/2116
 def demo():
     print("To run the demo code for a module, type nltk.module.demo()")

@@ -49,9 +49,9 @@ from nltk.internals import raise_unorderable_types
 
 _NINF = float("-1e300")
 
-##//////////////////////////////////////////////////////
-##  Frequency Distributions
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Frequency Distributions
+# //////////////////////////////////////////////////////
 
 
 class FreqDist(Counter):
@@ -433,8 +433,11 @@ class FreqDist(Counter):
             self[key] >= other[key] for key in other
         )
 
-    __lt__ = lambda self, other: self <= other and not self == other
-    __gt__ = lambda self, other: self >= other and not self == other
+    def __lt__(self, other):
+        return self <= other and not self == other
+
+    def __gt__(self, other):
+        return self >= other and not self == other
 
     def __repr__(self):
         """
@@ -485,9 +488,9 @@ class FreqDist(Counter):
             yield token
 
 
-##//////////////////////////////////////////////////////
-##  Probability Distributions
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Probability Distributions
+# //////////////////////////////////////////////////////
 
 
 class ProbDistI(metaclass=ABCMeta):
@@ -663,7 +666,8 @@ class RandomProbDist(ProbDistI):
         total = sum(randrow)
         if total != 1:
             # this difference, if present, is so small (near NINF) that it
-            # can be subtracted from any element without risking probs not (0 1)
+            # can be subtracted from any element without risking probs not (0
+            # 1)
             randrow[-1] -= total - 1
 
         return {s: randrow[i] for i, s in enumerate(samples)}
@@ -1298,9 +1302,9 @@ class WittenBellProbDist(ProbDistI):
         return "<WittenBellProbDist based on %d samples>" % self._freqdist.N()
 
 
-##//////////////////////////////////////////////////////
-##  Good-Turing Probability Distributions
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Good-Turing Probability Distributions
+# //////////////////////////////////////////////////////
 
 # Good-Turing frequency estimation was contributed by Alan Turing and
 # his statistical assistant I.J. Good, during their collaboration in
@@ -1352,9 +1356,9 @@ class WittenBellProbDist(ProbDistI):
 # significance criterion.
 #
 
-##//////////////////////////////////////////////////////
-##  Simple Good-Turing Probablity Distributions
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Simple Good-Turing Probablity Distributions
+# //////////////////////////////////////////////////////
 
 
 class SimpleGoodTuringProbDist(ProbDistI):
@@ -1656,9 +1660,9 @@ class MutableProbDist(ProbDistI):
             self._data[i] = 2 ** (prob) if log else prob
 
 
-##/////////////////////////////////////////////////////
-##  Kneser-Ney Probability Distribution
-##//////////////////////////////////////////////////////
+# /////////////////////////////////////////////////////
+# Kneser-Ney Probability Distribution
+# //////////////////////////////////////////////////////
 
 # This method for calculating probabilities was introduced in 1995 by Reinhard
 # Kneser and Hermann Ney. It was meant to improve the accuracy of language
@@ -1806,9 +1810,9 @@ class KneserNeyProbDist(ProbDistI):
         return f"<KneserNeyProbDist based on {self._trigrams.N()} trigrams"
 
 
-##//////////////////////////////////////////////////////
-##  Probability Distribution Operations
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Probability Distribution Operations
+# //////////////////////////////////////////////////////
 
 
 def log_likelihood(test_pdist, actual_pdist):
@@ -1825,9 +1829,9 @@ def entropy(pdist):
     return -sum(p * math.log(p, 2) for p in probs)
 
 
-##//////////////////////////////////////////////////////
-##  Conditional Distributions
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Conditional Distributions
+# //////////////////////////////////////////////////////
 
 
 class ConditionalFreqDist(defaultdict):
@@ -1970,7 +1974,8 @@ class ConditionalFreqDist(defaultdict):
             freqs = []
             for condition in conditions:
                 if cumulative:
-                    # freqs should be a list of list where each sub list will be a frequency of a condition
+                    # freqs should be a list of list where each sub list will
+                    # be a frequency of a condition
                     freq = list(self[condition]._cumulative_frequencies(samples))
                 else:
                     freq = [self[condition][sample] for sample in samples]
@@ -2272,9 +2277,9 @@ class DictionaryConditionalProbDist(ConditionalProbDistI):
         return self[key]
 
 
-##//////////////////////////////////////////////////////
-## Adding in log-space.
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Adding in log-space.
+# //////////////////////////////////////////////////////
 
 # If the difference is bigger than this, then just take the bigger one:
 _ADD_LOGS_MAX_DIFF = math.log(1e-30, 2)
@@ -2299,9 +2304,9 @@ def sum_logs(logs):
     return reduce(add_logs, logs[1:], logs[0]) if len(logs) != 0 else _NINF
 
 
-##//////////////////////////////////////////////////////
-##  Probabilistic Mix-in
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Probabilistic Mix-in
+# //////////////////////////////////////////////////////
 
 
 class ProbabilisticMixIn:
@@ -2408,7 +2413,7 @@ class ImmutableProbabilisticMixIn(ProbabilisticMixIn):
         raise ValueError("%s is immutable" % self.__class__.__name__)
 
 
-## Helper function for processing keyword arguments
+# Helper function for processing keyword arguments
 
 
 def _get_kwarg(kwargs, key, default):
@@ -2420,9 +2425,9 @@ def _get_kwarg(kwargs, key, default):
     return arg
 
 
-##//////////////////////////////////////////////////////
-##  Demonstration
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Demonstration
+# //////////////////////////////////////////////////////
 
 
 def _create_rand_fdist(numsamples, numoutcomes):

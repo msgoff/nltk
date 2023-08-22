@@ -15,7 +15,7 @@
     or contact the author. All Rights Reserved.
 """
 
-### Constants
+# Constants
 
 _debug = 0
 

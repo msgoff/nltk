@@ -80,9 +80,9 @@ from collections import defaultdict
 from nltk.classify.naivebayes import NaiveBayesClassifier
 from nltk.probability import DictionaryProbDist, ELEProbDist, FreqDist
 
-##//////////////////////////////////////////////////////
-##  Positive Naive Bayes Classifier
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Positive Naive Bayes Classifier
+# //////////////////////////////////////////////////////
 
 
 class PositiveNaiveBayesClassifier(NaiveBayesClassifier):
@@ -107,7 +107,8 @@ class PositiveNaiveBayesClassifier(NaiveBayesClassifier):
         feature_values = defaultdict(set)
         fnames = set()
 
-        # Count up how many times each feature value occurred in positive examples.
+        # Count up how many times each feature value occurred in positive
+        # examples.
         num_positive_examples = 0
         for featureset in positive_featuresets:
             for fname, fval in featureset.items():
@@ -116,7 +117,8 @@ class PositiveNaiveBayesClassifier(NaiveBayesClassifier):
                 fnames.add(fname)
             num_positive_examples += 1
 
-        # Count up how many times each feature value occurred in unlabeled examples.
+        # Count up how many times each feature value occurred in unlabeled
+        # examples.
         num_unlabeled_examples = 0
         for featureset in unlabeled_featuresets:
             for fname, fval in featureset.items():
@@ -168,9 +170,9 @@ class PositiveNaiveBayesClassifier(NaiveBayesClassifier):
         return PositiveNaiveBayesClassifier(label_probdist, feature_probdist)
 
 
-##//////////////////////////////////////////////////////
-##  Demo
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Demo
+# //////////////////////////////////////////////////////
 
 
 def demo():

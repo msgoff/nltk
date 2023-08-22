@@ -54,9 +54,9 @@ from tkinter.filedialog import asksaveasfilename
 
 from nltk.util import in_idle
 
-##//////////////////////////////////////////////////////
-##  CanvasWidget
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# CanvasWidget
+# //////////////////////////////////////////////////////
 
 
 class CanvasWidget(metaclass=ABCMeta):
@@ -227,9 +227,9 @@ class CanvasWidget(metaclass=ABCMeta):
             self.__canvas.tag_bind(tag, "<ButtonPress-2>", self.__press_cb)
             self.__canvas.tag_bind(tag, "<ButtonPress-3>", self.__press_cb)
 
-    ##//////////////////////////////////////////////////////
-    ##  Inherited methods.
-    ##//////////////////////////////////////////////////////
+    # //////////////////////////////////////////////////////
+    # Inherited methods.
+    # //////////////////////////////////////////////////////
 
     def bbox(self):
         """
@@ -485,9 +485,9 @@ class CanvasWidget(metaclass=ABCMeta):
         """
         return self.__hidden
 
-    ##//////////////////////////////////////////////////////
-    ##  Callback interface
-    ##//////////////////////////////////////////////////////
+    # //////////////////////////////////////////////////////
+    # Callback interface
+    # //////////////////////////////////////////////////////
 
     def bind_click(self, callback, button=1):
         """
@@ -530,7 +530,7 @@ class CanvasWidget(metaclass=ABCMeta):
         """
         try:
             del self.__callbacks[button]
-        except:
+        except BaseException:
             pass
 
     def unbind_drag(self):
@@ -539,12 +539,12 @@ class CanvasWidget(metaclass=ABCMeta):
         """
         try:
             del self.__callbacks["drag"]
-        except:
+        except BaseException:
             pass
 
-    ##//////////////////////////////////////////////////////
-    ##  Callback internals
-    ##//////////////////////////////////////////////////////
+    # //////////////////////////////////////////////////////
+    # Callback internals
+    # //////////////////////////////////////////////////////
 
     def __press_cb(self, event):
         """
@@ -640,7 +640,7 @@ class CanvasWidget(metaclass=ABCMeta):
                 cb = self.__callbacks["drag"]
                 try:
                     cb(self)
-                except:
+                except BaseException:
                     print("Error in drag callback for %r" % self)
         elif self.__parent is not None:
             self.__parent.__drag()
@@ -661,9 +661,9 @@ class CanvasWidget(metaclass=ABCMeta):
         elif self.__parent is not None:
             self.__parent.__click(button)
 
-    ##//////////////////////////////////////////////////////
-    ##  Child/parent Handling
-    ##//////////////////////////////////////////////////////
+    # //////////////////////////////////////////////////////
+    # Child/parent Handling
+    # //////////////////////////////////////////////////////
 
     def _add_child_widget(self, child):
         """
@@ -701,9 +701,9 @@ class CanvasWidget(metaclass=ABCMeta):
         self.__children.remove(child)
         child.__parent = None
 
-    ##//////////////////////////////////////////////////////
-    ##  Defined by subclass
-    ##//////////////////////////////////////////////////////
+    # //////////////////////////////////////////////////////
+    # Defined by subclass
+    # //////////////////////////////////////////////////////
 
     @abstractmethod
     def _tags(self):
@@ -735,9 +735,9 @@ class CanvasWidget(metaclass=ABCMeta):
         """
 
 
-##//////////////////////////////////////////////////////
-##  Basic widgets.
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Basic widgets.
+# //////////////////////////////////////////////////////
 
 
 class TextWidget(CanvasWidget):
@@ -843,7 +843,7 @@ class SymbolWidget(TextWidget):
         "notsubset": "\313",
         "emptyset": "\306",
         "imp": "\336",
-        "rightarrow": chr(222),  #'\256',
+        "rightarrow": chr(222),  # '\256',
         "equal": "\75",
         "notequal": "\271",
         "intersection": "\307",
@@ -1080,7 +1080,7 @@ class OvalWidget(AbstractContainerWidget):
         if attr == "margin":
             self._margin = value
         elif attr == "double":
-            if value == True and self._oval2 is None:
+            if value and self._oval2 is None:
                 # Copy attributes & position from self._oval.
                 x1, y1, x2, y2 = c.bbox(self._oval)
                 w = self["width"] * 2
@@ -1758,9 +1758,9 @@ class ScrollWatcherWidget(CanvasWidget):
             canvas["scrollregion"] = scrollregion
 
 
-##//////////////////////////////////////////////////////
-##  Canvas Frame
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Canvas Frame
+# //////////////////////////////////////////////////////
 
 
 class CanvasFrame:
@@ -1999,9 +1999,9 @@ class CanvasFrame:
         self._parent.mainloop(*args, **kwargs)
 
 
-##//////////////////////////////////////////////////////
-##  Text display
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Text display
+# //////////////////////////////////////////////////////
 
 
 class ShowText:
@@ -2082,9 +2082,9 @@ class ShowText:
         self._top.mainloop(*args, **kwargs)
 
 
-##//////////////////////////////////////////////////////
-##  Entry dialog
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Entry dialog
+# //////////////////////////////////////////////////////
 
 
 class EntryDialog:
@@ -2144,7 +2144,7 @@ class EntryDialog:
     def _cancel(self, *e):
         try:
             self._reset()
-        except:
+        except BaseException:
             pass
         self._destroy()
 
@@ -2163,9 +2163,9 @@ class EntryDialog:
         self._top = None
 
 
-##//////////////////////////////////////////////////////
-##  Colorized List
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Colorized List
+# //////////////////////////////////////////////////////
 
 
 class ColorizedList:
@@ -2353,7 +2353,7 @@ class ColorizedList:
             else:
                 try:
                     del self._callbacks[e][func]
-                except:
+                except BaseException:
                     pass
 
     # ////////////////////////////////////////////////////////////
@@ -2446,9 +2446,9 @@ class ColorizedList:
         return "break"
 
 
-##//////////////////////////////////////////////////////
-##  Improved OptionMenu
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Improved OptionMenu
+# //////////////////////////////////////////////////////
 
 
 class MutableOptionMenu(Menubutton):
@@ -2514,9 +2514,9 @@ class MutableOptionMenu(Menubutton):
         self._menu = None
 
 
-##//////////////////////////////////////////////////////
-##  Test code.
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Test code.
+# //////////////////////////////////////////////////////
 
 
 def demo():

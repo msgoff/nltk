@@ -275,14 +275,17 @@ class Template(BrillTemplateI):
         """
 
         def nonempty_powerset(xs):  # xs is a list
-            # itertools docnonempty_powerset([1,2,3]) --> (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)
+            # itertools docnonempty_powerset([1,2,3]) --> (1,) (2,) (3,) (1,2)
+            # (1,3) (2,3) (1,2,3)
 
-            # find the correct tuple given combinations, one of {None, k, (k1,k2)}
+            # find the correct tuple given combinations, one of {None, k,
+            # (k1,k2)}
             k = combinations  # for brevity
             combrange = (
                 (1, len(xs) + 1)
                 if k is None
-                else (k, k + 1)  # n over 1 .. n over n (all non-empty combinations)
+                # n over 1 .. n over n (all non-empty combinations)
+                else (k, k + 1)
                 if isinstance(k, int)
                 else (k[0], k[1] + 1)  # n over k (only
             )  # n over k1, n over k1+1... n over k2

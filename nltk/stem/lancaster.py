@@ -227,7 +227,8 @@ class LancasterStemmer(StemmerI):
             # Find the position of the last letter of the word to be stemmed
             last_letter_position = self.__getLastLetter(word)
 
-            # Only stem the word if it has a last letter and a rule matching that last letter
+            # Only stem the word if it has a last letter and a rule matching
+            # that last letter
             if (
                 last_letter_position < 0
                 or word[last_letter_position] not in self.rule_dictionary
@@ -275,7 +276,7 @@ class LancasterStemmer(StemmerI):
                                     proceed = False
                                 break
                 # If no rules apply, the word doesn't need any more stemming
-                if rule_was_applied == False:
+                if not rule_was_applied:
                     proceed = False
         return word
 

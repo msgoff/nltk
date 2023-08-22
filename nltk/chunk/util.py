@@ -13,9 +13,9 @@ from nltk.tag.mapping import map_tag
 from nltk.tag.util import str2tuple
 from nltk.tree import Tree
 
-##//////////////////////////////////////////////////////
-## EVALUATION
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# EVALUATION
+# //////////////////////////////////////////////////////
 
 
 def accuracy(chunker, gold):
@@ -365,7 +365,7 @@ def tagstr2tree(
     return stack[0]
 
 
-### CONLL
+# CONLL
 
 _LINE_RE = re.compile(r"(\S+)\s+(\S+)\s+([IOB])-?(\S+)?")
 
@@ -499,7 +499,7 @@ def tree2conllstr(t):
     return "\n".join(lines)
 
 
-### IEER
+# IEER
 
 _IEER_DOC_RE = re.compile(
     r"<DOC>\s*"
@@ -583,7 +583,7 @@ def ieerstr2tree(
             "docno": m.group("docno"),
             "doctype": m.group("doctype"),
             "date_time": m.group("date_time"),
-            #'headline': m.group('headline')
+            # 'headline': m.group('headline')
             # we want to capture NEs in the headline too!
             "headline": _ieer_read_text(m.group("headline"), root_label),
         }

@@ -134,7 +134,7 @@ class ShiftReduceApp:
         self._lastoper1["text"] = ""
 
     #########################################
-    ##  Initialization Helpers
+    # Initialization Helpers
     #########################################
 
     def _init_fonts(self, root):
@@ -444,7 +444,7 @@ class ShiftReduceApp:
         self._cframe.add_widget(self._rtextlabel)
 
     #########################################
-    ##  Main draw procedure
+    # Main draw procedure
     #########################################
 
     def _redraw(self):
@@ -547,7 +547,7 @@ class ShiftReduceApp:
             self._prodlist.selection_set(index)
 
     #########################################
-    ##  Button Callbacks
+    # Button Callbacks
     #########################################
 
     def destroy(self, *e):
@@ -623,7 +623,7 @@ class ShiftReduceApp:
         self._top.mainloop(*args, **kwargs)
 
     #########################################
-    ##  Menubar callbacks
+    # Menubar callbacks
     #########################################
 
     def resize(self, size=None):
@@ -653,7 +653,7 @@ class ShiftReduceApp:
                 width=75,
                 font="fixed",
             )
-        except:
+        except BaseException:
             ShowText(
                 self._top,
                 "Help: Shift-Reduce Parser Application",
@@ -668,7 +668,7 @@ class ShiftReduceApp:
             from tkinter.messagebox import Message
 
             Message(message=ABOUT, title=TITLE).show()
-        except:
+        except BaseException:
             ShowText(self._top, TITLE, ABOUT)
 
     def edit_grammar(self, *e):
@@ -692,7 +692,7 @@ class ShiftReduceApp:
         self.reset()
 
     #########################################
-    ##  Reduce Production Selection
+    # Reduce Production Selection
     #########################################
 
     def _toggle_grammar(self, *e):
@@ -740,7 +740,7 @@ class ShiftReduceApp:
         )
 
     #########################################
-    ##  Animations
+    # Animations
     #########################################
 
     def _animate_shift(self):
@@ -851,7 +851,7 @@ class ShiftReduceApp:
             self._animating_lock = 0
 
     #########################################
-    ##  Hovering.
+    # Hovering.
     #########################################
 
     def _highlight_hover(self, event):

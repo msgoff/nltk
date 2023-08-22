@@ -283,7 +283,8 @@ def postag(
             print(f"{ruleno:4d} {rule.format(ruleformat):s}")
 
     # printing template statistics (optionally including comparison with the training data)
-    # note: if not separate_baseline_data, then baseline accuracy will be artificially high
+    # note: if not separate_baseline_data, then baseline accuracy will be
+    # artificially high
     if incremental_stats:
         print(
             "Incrementally tagging the test data, collecting individual rule statistics"
@@ -318,7 +319,8 @@ def postag(
             f.write("\n".join(error_list(gold_data, taggedtest)).encode("utf-8") + "\n")
         print(f"Wrote tagger errors including context to {error_output}")
 
-    # serializing the tagger to a pickle file and reloading (just to see it works)
+    # serializing the tagger to a pickle file and reloading (just to see it
+    # works)
     if serialize_output is not None:
         taggedtest = brill_tagger.tag_sents(testing_data)
         with open(serialize_output, "w") as print_rules:

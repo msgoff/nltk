@@ -101,7 +101,8 @@ class MWETokenizer(TokenizerI):
                 j = i
                 trie = self._mwes
                 last_match = -1
-                while j < n and text[j] in trie:  # and len(trie[text[j]]) > 0 :
+                # and len(trie[text[j]]) > 0 :
+                while j < n and text[j] in trie:
                     trie = trie[text[j]]
                     j = j + 1
                     if Trie.LEAF in trie:

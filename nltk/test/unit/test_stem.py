@@ -28,7 +28,8 @@ class SnowballTest(unittest.TestCase):
         assert ar_stemmer.stem("اللذان") == "اللذ"  # this is a stop word
         assert ar_stemmer.stem("الطالبات") == "طالب"
         assert ar_stemmer.stem("الكلمات") == "كلم"
-        # test where create the arabic stemmer without given init value to ignore_stopwords
+        # test where create the arabic stemmer without given init value to
+        # ignore_stopwords
         ar_stemmer = SnowballStemmer("arabic")
         assert ar_stemmer.stem("الْعَرَبِــــــيَّة") == "عرب"
         assert ar_stemmer.stem("العربية") == "عرب"

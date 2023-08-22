@@ -20,7 +20,8 @@ The two serialization outputs are "rtuple" and "clause".
   where the relation, subject and object have been canonicalized to single strings.
 """
 
-# todo: get a more general solution to canonicalized symbols for clauses -- maybe use xmlcharrefs?
+# todo: get a more general solution to canonicalized symbols for clauses
+# -- maybe use xmlcharrefs?
 
 import html
 import re
@@ -250,12 +251,13 @@ def extract_rels(subjclass, objclass, doc, corpus="ace", pattern=None, window=10
 
     reldicts = semi_rel2reldict(pairs)
 
-    relfilter = lambda x: (
-        x["subjclass"] == subjclass
-        and len(x["filler"].split()) <= window
-        and pattern.match(x["filler"])
-        and x["objclass"] == objclass
-    )
+    def relfilter(x):
+        return (
+            x["subjclass"] == subjclass
+            and len(x["filler"].split()) <= window
+            and pattern.match(x["filler"])
+            and x["objclass"] == objclass
+        )
 
     return list(filter(relfilter, reldicts))
 
@@ -422,7 +424,7 @@ def roles_demo(trace=0):
 
 
 ##############################################
-### Show what's in the IEER Headlines
+# Show what's in the IEER Headlines
 ##############################################
 
 
@@ -444,7 +446,7 @@ def ieer_headlines():
 
 
 #############################################
-## Dutch CONLL2002: take_on_role(PER, ORG
+# Dutch CONLL2002: take_on_role(PER, ORG
 #############################################
 
 
@@ -483,7 +485,7 @@ def conllned(trace=1):
 
 
 #############################################
-## Spanish CONLL2002: (PER, ORG)
+# Spanish CONLL2002: (PER, ORG)
 #############################################
 
 

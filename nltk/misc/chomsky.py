@@ -13,6 +13,10 @@ To generate n sentences of linguistic wisdom, type
     (CHOMSKY 5) generates half a screen of linguistic truth.
 """
 
+from itertools import chain, islice
+import textwrap
+import random
+
 leadins = """To characterize a linguistic level L,
     On the other hand,
     This suggests that
@@ -114,10 +118,6 @@ gibberish (e.g. (98d)).
 scope of a complex symbol.
     the strong generative capacity of the theory."""
 # List of OBJECTs selected for profound sententiousness.
-
-import random
-import textwrap
-from itertools import chain, islice
 
 
 def generate_chomsky(times=5, line_length=72):

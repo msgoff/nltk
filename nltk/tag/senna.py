@@ -103,7 +103,8 @@ class SennaChunkTagger(Senna):
         current_chunk_position = []
         for idx, word_pos in enumerate(tagged_sent):
             word, pos = word_pos
-            if "-" + chunk_type in pos:  # Append the word to the current_chunk.
+            # Append the word to the current_chunk.
+            if "-" + chunk_type in pos:
                 current_chunk.append(word)
                 current_chunk_position.append(idx)
             else:

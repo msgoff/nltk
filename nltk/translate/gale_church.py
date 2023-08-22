@@ -138,7 +138,8 @@ def align_log_prob(i, j, source_sents, target_sents, alignment, params):
     l_t = sum(target_sents[j - offset - 1] for offset in range(alignment[1]))
     try:
         # actually, the paper says l_s * params.VARIANCE_CHARACTERS, this is based on the C
-        # reference implementation. With l_s in the denominator, insertions are impossible.
+        # reference implementation. With l_s in the denominator, insertions are
+        # impossible.
         m = (l_s + l_t / params.AVERAGE_CHARACTERS) / 2
         delta = (l_s * params.AVERAGE_CHARACTERS - l_t) / math.sqrt(
             m * params.VARIANCE_CHARACTERS
@@ -169,7 +170,8 @@ def align_blocks(source_sents_lens, target_sents_lens, params=LanguageIndependen
 
     alignment_types = list(params.PRIORS.keys())
 
-    # there are always three rows in the history (with the last of them being filled)
+    # there are always three rows in the history (with the last of them being
+    # filled)
     D = [[]]
 
     backlinks = {}

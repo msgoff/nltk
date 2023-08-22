@@ -161,7 +161,7 @@ class CategorizedMarkdownCorpusReader(CategorizedCorpusReader, MarkdownCorpusRea
                 if metadata:
                     self._map[file_id] = metadata[0].get(cat_field, [])
 
-    ### Begin CategorizedCorpusReader Overrides
+    # Begin CategorizedCorpusReader Overrides
     @comma_separated_string_args
     def categories(self, fileids=None):
         return super().categories(fileids)
@@ -172,9 +172,9 @@ class CategorizedMarkdownCorpusReader(CategorizedCorpusReader, MarkdownCorpusRea
             return self._fileids
         return super().fileids(categories)
 
-    ### End CategorizedCorpusReader Overrides
+    # End CategorizedCorpusReader Overrides
 
-    ### Begin MarkdownCorpusReader Overrides
+    # Begin MarkdownCorpusReader Overrides
     @comma_separated_string_args
     def raw(self, fileids=None, categories=None):
         return super().raw(self._resolve(fileids, categories))
@@ -191,7 +191,7 @@ class CategorizedMarkdownCorpusReader(CategorizedCorpusReader, MarkdownCorpusRea
     def paras(self, fileids=None, categories=None):
         return super().paras(self._resolve(fileids, categories))
 
-    ### End MarkdownCorpusReader Overrides
+    # End MarkdownCorpusReader Overrides
 
     def concatenated_view(self, reader, fileids, categories):
         return concat(

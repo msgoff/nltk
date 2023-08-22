@@ -452,7 +452,8 @@ class Model:
         if isinstance(parsed, ApplicationExpression):
             function, arguments = parsed.uncurry()
             if isinstance(function, AbstractVariableExpression):
-                # It's a predicate expression ("P(x,y)"), so used uncurried arguments
+                # It's a predicate expression ("P(x,y)"), so used uncurried
+                # arguments
                 funval = self.satisfy(function, g)
                 argvals = tuple(self.satisfy(arg, g) for arg in arguments)
                 return argvals in funval
@@ -577,7 +578,7 @@ class Model:
                     print(indent + "(trying assignment %s)" % new_g)
 
                 # parsed == False under g[u/var]?
-                if value == False:
+                if not value:
                     if trace:
                         print(indent + f"value of '{parsed}' under {new_g} is False")
 
@@ -738,9 +739,12 @@ def foldemo(trace=None):
         "exists x. (boy(x) &  -(x = adam))",
         "exists x. (boy(x) & all y. love(y, x))",
         "all x. (boy(x) | girl(x))",
-        "all x. (girl(x) -> exists y. boy(y) & love(x, y))",  # Every girl loves exists boy.
-        "exists x. (boy(x) & all y. (girl(y) -> love(y, x)))",  # There is exists boy that every girl loves.
-        "exists x. (boy(x) & all y. (girl(y) -> love(x, y)))",  # exists boy loves every girl.
+        # Every girl loves exists boy.
+        "all x. (girl(x) -> exists y. boy(y) & love(x, y))",
+        # There is exists boy that every girl loves.
+        "exists x. (boy(x) & all y. (girl(y) -> love(y, x)))",
+        # exists boy loves every girl.
+        "exists x. (boy(x) & all y. (girl(y) -> love(x, y)))",
         "all x. (dog(x) -> - girl(x))",
         "exists x. exists y. (love(x, y) & love(x, y))",
     ]

@@ -230,7 +230,8 @@ class ComparativeSentencesCorpusReader(CorpusReader):
             if comparison_tags:
                 grad_comparisons = re.findall(GRAD_COMPARISON, line)
                 non_grad_comparisons = re.findall(NON_GRAD_COMPARISON, line)
-                # Advance to the next line (it contains the comparative sentence)
+                # Advance to the next line (it contains the comparative
+                # sentence)
                 comparison_text = stream.readline().strip()
                 if self._word_tokenizer:
                     comparison_text = self._word_tokenizer.tokenize(comparison_text)
@@ -240,7 +241,8 @@ class ComparativeSentencesCorpusReader(CorpusReader):
                 # and populate their fields
                 comparison_bundle = []
                 if grad_comparisons:
-                    # Each comparison tag has its own relations on a separate line
+                    # Each comparison tag has its own relations on a separate
+                    # line
                     for comp in grad_comparisons:
                         comp_type = int(re.match(r"<cs-(\d)>", comp).group(1))
                         comparison = Comparison(

@@ -19,7 +19,8 @@ class TestNIST(unittest.TestCase):
         # The order of the list corresponds to the order of the ngrams.
         with open(mteval_output_file) as mteval_fin:
             # The numbers are located in the last 4th line of the file.
-            # The first and 2nd item in the list are the score and system names.
+            # The first and 2nd item in the list are the score and system
+            # names.
             mteval_nist_scores = map(float, mteval_fin.readlines()[-4].split()[1:-1])
 
         with open(ref_file, encoding="utf8") as ref_fin:
@@ -27,7 +28,8 @@ class TestNIST(unittest.TestCase):
                 # Whitespace tokenize the file.
                 # Note: split() automatically strip().
                 hypotheses = list(map(lambda x: x.split(), hyp_fin))
-                # Note that the corpus_bleu input is list of list of references.
+                # Note that the corpus_bleu input is list of list of
+                # references.
                 references = list(map(lambda x: [x.split()], ref_fin))
                 # Without smoothing.
                 for i, mteval_nist in zip(range(1, 10), mteval_nist_scores):

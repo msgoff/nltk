@@ -21,7 +21,7 @@ from nltk.grammar import Nonterminal, Production
 from nltk.internals import deprecated
 
 ######################################################################
-## Trees
+# Trees
 ######################################################################
 
 
@@ -125,10 +125,17 @@ class Tree(list):
             return self.__class__.__name__ < other.__class__.__name__
 
     # @total_ordering doesn't work here, since the class inherits from a builtin class
-    __ne__ = lambda self, other: not self == other
-    __gt__ = lambda self, other: not (self < other or self == other)
-    __le__ = lambda self, other: self < other or self == other
-    __ge__ = lambda self, other: not self < other
+    def __ne__(self, other):
+        return not self == other
+
+    def __gt__(self, other):
+        return not (self < other or self == other)
+
+    def __le__(self, other):
+        return self < other or self == other
+
+    def __ge__(self, other):
+        return not self < other
 
     # ////////////////////////////////////////////////////////////
     # Disabled list operations
@@ -901,7 +908,7 @@ def _child_names(tree):
 
 
 ######################################################################
-## Demonstration
+# Demonstration
 ######################################################################
 
 

@@ -73,7 +73,8 @@ class TreebankWordTokenizer(TokenizerI):
     # Pads parentheses
     PARENS_BRACKETS = (re.compile(r"[\]\[\(\)\{\}\<\>]"), r" \g<0> ")
 
-    # Optionally: Convert parentheses, brackets and converts them to PTB symbols.
+    # Optionally: Convert parentheses, brackets and converts them to PTB
+    # symbols.
     CONVERT_PARENTHESES = [
         (re.compile(r"\("), "-LRB-"),
         (re.compile(r"\)"), "-RRB-"),
@@ -299,7 +300,8 @@ class TreebankWordDetokenizer(TokenizerI):
     # Handles double dashes
     DOUBLE_DASHES = (re.compile(r" -- "), r"--")
 
-    # Optionally: Convert parentheses, brackets and converts them from PTB symbols.
+    # Optionally: Convert parentheses, brackets and converts them from PTB
+    # symbols.
     CONVERT_PARENTHESES = [
         (re.compile("-LRB-"), "("),
         (re.compile("-RRB-"), ")"),

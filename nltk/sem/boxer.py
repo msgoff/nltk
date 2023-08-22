@@ -220,7 +220,7 @@ class Boxer:
             "false",
             "--semantics",
             "drs",
-            #'--flat', 'false', # removed from boxer
+            # '--flat', 'false', # removed from boxer
             "--resolve",
             ["false", "true"][self._resolve],
             "--elimeq",

@@ -117,7 +117,8 @@ def chomsky_normal_form(
     # assume all terminals have no siblings
 
     # A semi-hack to have elegant looking code below.  As a result,
-    # any subtree with a branching factor greater than 999 will be incorrectly truncated.
+    # any subtree with a branching factor greater than 999 will be incorrectly
+    # truncated.
     if horzMarkov is None:
         horzMarkov = 999
 
@@ -183,7 +184,8 @@ def chomsky_normal_form(
 def un_chomsky_normal_form(
     tree, expandUnary=True, childChar="|", parentChar="^", unaryChar="+"
 ):
-    # Traverse the tree-depth first keeping a pointer to the parent for modification purposes.
+    # Traverse the tree-depth first keeping a pointer to the parent for
+    # modification purposes.
     nodeList = [(tree, [])]
     while nodeList != []:
         node, parent = nodeList.pop()
@@ -204,7 +206,8 @@ def un_chomsky_normal_form(
                 else:
                     parent.extend([node[0], node[1]])
 
-                # parent is now the current node so the children of parent will be added to the agenda
+                # parent is now the current node so the children of parent will
+                # be added to the agenda
                 node = parent
             else:
                 parentIndex = node.label().find(parentChar)
@@ -213,7 +216,7 @@ def un_chomsky_normal_form(
                     node.set_label(node.label()[:parentIndex])
 
                 # expand collapsed unary productions
-                if expandUnary == True:
+                if expandUnary:
                     unaryIndex = node.label().find(unaryChar)
                     if unaryIndex != -1:
                         newNode = Tree(
@@ -260,7 +263,7 @@ def collapse_unary(tree, collapsePOS=False, collapseRoot=False, joinChar="+"):
             if (
                 len(node) == 1
                 and isinstance(node[0], Tree)
-                and (collapsePOS == True or isinstance(node[0, 0], Tree))
+                and (collapsePOS or isinstance(node[0, 0], Tree))
             ):
                 node.set_label(node.label() + joinChar + node[0].label())
                 node[0:] = [child for child in node[0]]
@@ -314,11 +317,13 @@ def demo():
     cnfTree = deepcopy(collapsedTree)
     chomsky_normal_form(cnfTree)
 
-    # convert the tree to CNF with parent annotation (one level) and horizontal smoothing of order two
+    # convert the tree to CNF with parent annotation (one level) and
+    # horizontal smoothing of order two
     parentTree = deepcopy(collapsedTree)
     chomsky_normal_form(parentTree, horzMarkov=2, vertMarkov=1)
 
-    # convert the tree back to its original form (used to make CYK results comparable)
+    # convert the tree back to its original form (used to make CYK results
+    # comparable)
     original = deepcopy(parentTree)
     un_chomsky_normal_form(original)
 

@@ -326,7 +326,8 @@ class NKJPCorpus_Segmentation_View(XMLCorpusView):
         prev_txt_nr = -1
         for word in segm:
             txt_nr = self.get_segm_id(word)
-            # get increasing sequence of ids: in case of choice get first possibility
+            # get increasing sequence of ids: in case of choice get first
+            # possibility
             if self.get_sent_beg(word) > prev_txt_end - 1 or prev_txt_nr != txt_nr:
                 ret.append(word)
                 prev_txt_end = self.get_sent_end(word)

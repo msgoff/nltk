@@ -367,7 +367,9 @@ def demo(scorer=None, compare_scorer=None):
     from nltk.corpus import stopwords, webtext
 
     ignored_words = stopwords.words("english")
-    word_filter = lambda w: len(w) < 3 or w.lower() in ignored_words
+
+    def word_filter(w):
+        return len(w) < 3 or w.lower() in ignored_words
 
     for file in webtext.fileids():
         words = [word.lower() for word in webtext.words(file)]

@@ -114,7 +114,8 @@ class TableauProver(Prover):
             agenda.put(context(current).simplify())
             return self._attempt_proof(agenda, accessible_vars, atoms, debug + 1)
         else:
-            # mark all AllExpressions as 'not exhausted' into the agenda since we are (potentially) adding new accessible vars
+            # mark all AllExpressions as 'not exhausted' into the agenda since
+            # we are (potentially) adding new accessible vars
             agenda.mark_alls_fresh()
             return self._attempt_proof(
                 agenda,
@@ -137,7 +138,8 @@ class TableauProver(Prover):
             agenda.put(context(current).simplify())
             return self._attempt_proof(agenda, accessible_vars, atoms, debug + 1)
         else:
-            # mark all AllExpressions as 'not exhausted' into the agenda since we are (potentially) adding new accessible vars
+            # mark all AllExpressions as 'not exhausted' into the agenda since
+            # we are (potentially) adding new accessible vars
             agenda.mark_alls_fresh()
             return self._attempt_proof(
                 agenda,
@@ -154,7 +156,8 @@ class TableauProver(Prover):
             debug.line("CLOSED", 1)
             return True
 
-        # mark all AllExpressions as 'not exhausted' into the agenda since we are (potentially) adding new accessible vars
+        # mark all AllExpressions as 'not exhausted' into the agenda since we
+        # are (potentially) adding new accessible vars
         agenda.mark_alls_fresh()
         return self._attempt_proof(
             agenda, accessible_vars, atoms | {(current, False)}, debug + 1
@@ -168,7 +171,8 @@ class TableauProver(Prover):
             debug.line("CLOSED", 1)
             return True
 
-        # mark all AllExpressions as 'not exhausted' into the agenda since we are (potentially) adding new accessible vars
+        # mark all AllExpressions as 'not exhausted' into the agenda since we
+        # are (potentially) adding new accessible vars
         agenda.mark_alls_fresh()
         return self._attempt_proof(
             agenda, accessible_vars, atoms | {(current.term, True)}, debug + 1
@@ -212,9 +216,9 @@ class TableauProver(Prover):
     def _attempt_proof_n_eq(
         self, current, context, agenda, accessible_vars, atoms, debug
     ):
-        ###########################################################################
+        #######################################################################
         # Since 'current' is of type '~(a=b)', the path is closed if 'a' == 'b'
-        ###########################################################################
+        #######################################################################
         if current.term.first == current.term.second:
             debug.line("CLOSED", 1)
             return True
@@ -328,10 +332,10 @@ class TableauProver(Prover):
     def _attempt_proof_eq(
         self, current, context, agenda, accessible_vars, atoms, debug
     ):
-        #########################################################################
+        #######################################################################
         # Since 'current' is of the form '(a = b)', replace ALL free instances
         # of 'a' with 'b'
-        #########################################################################
+        #######################################################################
         agenda.put_atoms(atoms)
         agenda.replace_all(current.first, current.second)
         accessible_vars.discard(current.first)
@@ -358,7 +362,8 @@ class TableauProver(Prover):
 
         # if there are accessible_vars on the path
         if accessible_vars:
-            # get the set of bound variables that have not be used by this AllExpression
+            # get the set of bound variables that have not be used by this
+            # AllExpression
             bv_available = accessible_vars - current._used_vars
 
             if bv_available:

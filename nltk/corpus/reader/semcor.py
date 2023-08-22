@@ -151,7 +151,8 @@ class SemcorCorpusReader(XMLCorpusReader):
             tkn = ""  # fixes issue 337?
 
         lemma = xmlword.get("lemma", tkn)  # lemma or NE class
-        lexsn = xmlword.get("lexsn")  # lex_sense (locator for the lemma's sense)
+        # lex_sense (locator for the lemma's sense)
+        lexsn = xmlword.get("lexsn")
         if lexsn is not None:
             sense_key = lemma + "%" + lexsn
             wnpos = ("n", "v", "a", "r", "s")[
@@ -165,7 +166,8 @@ class SemcorCorpusReader(XMLCorpusReader):
         # does not exactly match the enclosed string, e.g. due to typographical adjustments
         # or discontinuity of a multiword expression. If a redefinition has occurred,
         # the "rdf" attribute holds its inflected form and "lemma" holds its lemma.
-        # For NEs, "rdf", "lemma", and "pn" all hold the same value (the NE class).
+        # For NEs, "rdf", "lemma", and "pn" all hold the same value (the NE
+        # class).
         sensenum = xmlword.get("wnsn")  # WordNet sense number
         isOOVEntity = "pn" in xmlword.keys()  # a "personal name" (NE) not in WordNet
         pos = xmlword.get(
@@ -183,7 +185,8 @@ class SemcorCorpusReader(XMLCorpusReader):
                 )
             return itm
         else:
-            ww = tkn.split("_")  # TODO: case where punctuation intervenes in MWE
+            # TODO: case where punctuation intervenes in MWE
+            ww = tkn.split("_")
             if unit == "word":
                 return ww
             else:

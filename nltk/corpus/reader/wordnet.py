@@ -1413,7 +1413,8 @@ class WordNetCorpusReader(CorpusReader):
                         # get synset offsets
                         synset_offsets = [int(_next_token()) for _ in range(n_synsets)]
 
-                    # raise more informative error with file name and line number
+                    # raise more informative error with file name and line
+                    # number
                     except (AssertionError, ValueError) as e:
                         tup = ("index.%s" % suffix), (i + 1), e
                         raise WordNetError("file %s, line %i: %s" % tup) from e
@@ -1565,7 +1566,8 @@ class WordNetCorpusReader(CorpusReader):
         data_file = self._data_file(pos)
         data_file.seek(offset)
         data_file_line = data_file.readline()
-        # If valid, the offset equals the 8-digit 0-padded integer found at the start of the line:
+        # If valid, the offset equals the 8-digit 0-padded integer found at the
+        # start of the line:
         line_offset = data_file_line[:8]
         if (
             line_offset.isalnum()
@@ -1910,7 +1912,7 @@ class WordNetCorpusReader(CorpusReader):
                     line = data_file.readline()
 
             # close the extra file handle we opened
-            except:
+            except BaseException:
                 data_file.close()
                 raise
             else:
@@ -1939,7 +1941,7 @@ class WordNetCorpusReader(CorpusReader):
         try:
             with reader.open(file) as fp:
                 return fp.read()
-        except:
+        except BaseException:
             if lang in self._lang_data:
                 return f"Cannot determine {file} for {lang}"
             else:
@@ -2237,7 +2239,8 @@ class WordNetCorpusReader(CorpusReader):
                 elif offset_pos[-1] == "a":
                     wnss = self.of2ss(offset_pos)
                     if wnss and wnss.pos() == "s":  # Wordnet pos is "s"
-                        # Label OMW adjective satellites back to their Wordnet pos ("s")
+                        # Label OMW adjective satellites back to their Wordnet
+                        # pos ("s")
                         offset_pos = self.ss2of(wnss)
                 pair = label.split(":")
                 attr = pair[-1]

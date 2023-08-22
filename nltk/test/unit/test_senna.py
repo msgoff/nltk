@@ -8,7 +8,8 @@ from os import environ, path, sep
 from nltk.classify import Senna
 from nltk.tag import SennaChunkTagger, SennaNERTagger, SennaTagger
 
-# Set Senna executable path for tests if it is not specified as an environment variable
+# Set Senna executable path for tests if it is not specified as an
+# environment variable
 if "SENNA" in environ:
     SENNA_EXECUTABLE_PATH = path.normpath(environ["SENNA"]) + sep
 else:

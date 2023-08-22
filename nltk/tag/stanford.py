@@ -201,7 +201,8 @@ class StanfordNERTagger(StanfordTagger):
 
     @property
     def _cmd(self):
-        # Adding -tokenizerFactory edu.stanford.nlp.process.WhitespaceTokenizer -tokenizerOptions tokenizeNLs=false for not using stanford Tokenizer
+        # Adding -tokenizerFactory edu.stanford.nlp.process.WhitespaceTokenizer
+        # -tokenizerOptions tokenizeNLs=false for not using stanford Tokenizer
         return [
             "edu.stanford.nlp.ie.crf.CRFClassifier",
             "-loadClassifier",

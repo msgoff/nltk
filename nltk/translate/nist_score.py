@@ -90,9 +90,8 @@ def corpus_nist(list_of_references, hypotheses, n=5):
     # Collect the ngram coounts from the reference sentences.
     ngram_freq = Counter()
     total_reference_words = 0
-    for (
-        references
-    ) in list_of_references:  # For each source sent, there's a list of reference sents.
+    # For each source sent, there's a list of reference sents.
+    for references in list_of_references:
         for reference in references:
             # For each order of ngram, count the ngram occurrences.
             for i in range(1, n + 1):
@@ -101,10 +100,11 @@ def corpus_nist(list_of_references, hypotheses, n=5):
 
     # Compute the information weights based on the reference sentences.
     # Eqn 2 in Doddington (2002):
-    # Info(w_1 ... w_n) = log_2 [ (# of occurrences of w_1 ... w_n-1) / (# of occurrences of w_1 ... w_n) ]
+    # Info(w_1 ... w_n) = log_2 [ (# of occurrences of w_1 ... w_n-1) / (# of
+    # occurrences of w_1 ... w_n) ]
     information_weights = {}
     for _ngram in ngram_freq:  # w_1 ... w_n
-        _mgram = _ngram[:-1]  #  w_1 ... w_n-1
+        _mgram = _ngram[:-1]  # w_1 ... w_n-1
         # From https://github.com/moses-smt/mosesdecoder/blob/master/scripts/generic/mteval-v13a.pl#L546
         # it's computed as such:
         #     denominator = ngram_freq[_mgram] if _mgram and _mgram in ngram_freq else denominator = total_reference_words

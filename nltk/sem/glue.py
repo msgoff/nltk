@@ -164,7 +164,8 @@ class GlueDict(dict):
             contents = nltk.data.load(
                 self.filename, format="text", encoding=self.file_encoding
             )
-            # TODO: the above can't handle zip files, but this should anyway be fixed in nltk.data.load()
+            # TODO: the above can't handle zip files, but this should anyway be
+            # fixed in nltk.data.load()
         except LookupError as e:
             try:
                 contents = nltk.data.load(
@@ -196,7 +197,8 @@ class GlueDict(dict):
             if len(parts) > 1:
                 for i, c in enumerate(parts[1]):
                     if c == "(":
-                        if paren_count == 0:  # if it's the first '(' of a tuple
+                        # if it's the first '(' of a tuple
+                        if paren_count == 0:
                             tuple_start = i + 1  # then save the index
                         paren_count += 1
                     elif c == ")":
@@ -238,7 +240,7 @@ class GlueDict(dict):
                 end_inheritance = parts[0].index(")")
                 sem = parts[0][:start_inheritance].strip()
                 supertype = parts[0][start_inheritance + 1 : end_inheritance]
-            except:
+            except BaseException:
                 sem = parts[0].strip()
                 supertype = None
 
@@ -317,7 +319,8 @@ class GlueDict(dict):
                 semtype = self[name]
                 break
         if semtype is None:
-            # raise KeyError, "There is no GlueDict entry for sem type '%s' (for '%s')" % (sem, word)
+            # raise KeyError, "There is no GlueDict entry for sem type '%s'
+            # (for '%s')" % (sem, word)
             return []
 
         self.add_missing_dependencies(node, depgraph)

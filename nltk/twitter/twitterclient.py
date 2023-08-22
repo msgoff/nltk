@@ -542,7 +542,7 @@ class TweetWriter(TweetHandlerI):
             self.output.close()
 
     def do_continue(self):
-        if self.repeat == False:
+        if not self.repeat:
             return TweetHandlerI.do_continue(self)
 
         if self.do_stop:

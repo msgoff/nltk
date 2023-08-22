@@ -143,7 +143,8 @@ class TestBLEU(unittest.TestCase):
         try:
             self.assertWarns(UserWarning, sentence_bleu, references, hypothesis)
         except AttributeError:
-            pass  # unittest.TestCase.assertWarns is only supported in Python >= 3.2.
+            # unittest.TestCase.assertWarns is only supported in Python >= 3.2.
+            pass
 
 
 # @unittest.skip("Skipping fringe cases for BLEU.")
@@ -163,7 +164,8 @@ class TestBLEUFringeCases(unittest.TestCase):
         try:
             self.assertWarns(UserWarning, sentence_bleu, references, hypothesis)
         except AttributeError:
-            pass  # unittest.TestCase.assertWarns is only supported in Python >= 3.2.
+            # unittest.TestCase.assertWarns is only supported in Python >= 3.2.
+            pass
 
         # Test case where n > len(hypothesis) but so is n > len(reference), and
         # it's a special case where reference == hypothesis.
@@ -182,14 +184,16 @@ class TestBLEUFringeCases(unittest.TestCase):
         assert sentence_bleu(references, hypothesis) == 0
 
     def test_length_one_hypothesis(self):
-        # Test case where there's hypothesis is of length 1 in Smoothing method 4.
+        # Test case where there's hypothesis is of length 1 in Smoothing method
+        # 4.
         references = ["The candidate has no alignment to any of the references".split()]
         hypothesis = ["Foo"]
         method4 = SmoothingFunction().method4
         try:
             sentence_bleu(references, hypothesis, smoothing_function=method4)
         except ValueError:
-            pass  # unittest.TestCase.assertWarns is only supported in Python >= 3.2.
+            # unittest.TestCase.assertWarns is only supported in Python >= 3.2.
+            pass
 
     def test_empty_references(self):
         # Test case where there's reference is empty.
@@ -215,7 +219,8 @@ class TestBLEUFringeCases(unittest.TestCase):
         try:
             self.assertWarns(UserWarning, sentence_bleu, references, hypothesis)
         except AttributeError:
-            pass  # unittest.TestCase.assertWarns is only supported in Python >= 3.2.
+            # unittest.TestCase.assertWarns is only supported in Python >= 3.2.
+            pass
 
 
 class TestBLEUvsMteval13a(unittest.TestCase):
@@ -228,7 +233,8 @@ class TestBLEUvsMteval13a(unittest.TestCase):
         # The order of the list corresponds to the order of the ngrams.
         with open(mteval_output_file) as mteval_fin:
             # The numbers are located in the last 2nd line of the file.
-            # The first and 2nd item in the list are the score and system names.
+            # The first and 2nd item in the list are the score and system
+            # names.
             mteval_bleu_scores = map(float, mteval_fin.readlines()[-2].split()[1:-1])
 
         with open(ref_file, encoding="utf8") as ref_fin:
@@ -236,7 +242,8 @@ class TestBLEUvsMteval13a(unittest.TestCase):
                 # Whitespace tokenize the file.
                 # Note: split() automatically strip().
                 hypothesis = list(map(lambda x: x.split(), hyp_fin))
-                # Note that the corpus_bleu input is list of list of references.
+                # Note that the corpus_bleu input is list of list of
+                # references.
                 references = list(map(lambda x: [x.split()], ref_fin))
                 # Without smoothing.
                 for i, mteval_bleu in zip(range(1, 10), mteval_bleu_scores):
@@ -273,7 +280,8 @@ class TestBLEUWithBadSentence(unittest.TestCase):
         hypotheses = [hyp.split()]
         try:  # Check that the warning is raised since no. of 2-grams < 0.
             with self.assertWarns(UserWarning):
-                # Verify that the BLEU output is undesired since no. of 2-grams < 0.
+                # Verify that the BLEU output is undesired since no. of 2-grams
+                # < 0.
                 self.assertAlmostEqual(
                     corpus_bleu(references, hypotheses), 0.0, places=4
                 )

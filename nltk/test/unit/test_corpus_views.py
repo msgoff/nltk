@@ -15,7 +15,8 @@ class TestCorpusViews(unittest.TestCase):
     linetok = nltk.LineTokenizer(blanklines="keep")
     names = [
         "corpora/inaugural/README",  # A very short file (160 chars)
-        "corpora/inaugural/1793-Washington.txt",  # A relatively short file (791 chars)
+        # A relatively short file (791 chars)
+        "corpora/inaugural/1793-Washington.txt",
         "corpora/inaugural/1909-Taft.txt",  # A longer file (32k chars)
     ]
 

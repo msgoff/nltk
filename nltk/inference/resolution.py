@@ -362,7 +362,8 @@ def _iterate_first(first, second, bindings, used, skipped, finalize_method, debu
                 first[0], second[0], bindings, used
             )
             # Unification found, so progress with this line of unification
-            # put skipped and unused terms back into play for later unification.
+            # put skipped and unused terms back into play for later
+            # unification.
             newfirst = first[1:] + skipped[0] + unused[0]
             newsecond = second[1:] + skipped[1] + unused[1]
             result += _iterate_first(
@@ -401,7 +402,8 @@ def _iterate_second(first, second, bindings, used, skipped, finalize_method, deb
                 first[0], second[0], bindings, used
             )
             # Unification found, so progress with this line of unification
-            # put skipped and unused terms back into play for later unification.
+            # put skipped and unused terms back into play for later
+            # unification.
             newfirst = first[1:] + skipped[0] + unused[0]
             newsecond = second[1:] + skipped[1] + unused[1]
             result += _iterate_second(

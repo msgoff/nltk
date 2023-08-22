@@ -240,7 +240,8 @@ def partial_names_demo(trainer, features=names_demo_features):
     random.shuffle(male_names)
     random.shuffle(female_names)
 
-    # Create a list of male names to be used as positive-labeled examples for training
+    # Create a list of male names to be used as positive-labeled examples for
+    # training
     positive = map(features, male_names[:2000])
 
     # Create a list of male and female names to be used as unlabeled examples
@@ -272,7 +273,7 @@ def partial_names_demo(trainer, features=names_demo_features):
         print()
         print("Unseen Names      P(Male)  P(Female)\n" + "-" * 40)
         for (name, is_male), pdist in zip(test, pdists)[:5]:
-            if is_male == True:
+            if is_male:
                 fmt = "  %-15s *%6.4f   %6.4f"
             else:
                 fmt = "  %-15s  %6.4f  *%6.4f"

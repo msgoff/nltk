@@ -125,7 +125,8 @@ class MyServerHandler(BaseHTTPRequestHandler):
                     page = get_static_page_by_path(usp)
                 except FileNotFoundError:
                     page = "Internal error: Path for static page '%s' is unknown" % usp
-                    # Set type to plain to prevent XSS by printing the path as HTML
+                    # Set type to plain to prevent XSS by printing the path as
+                    # HTML
                     type = "text/plain"
         elif sp.startswith("search"):
             # This doesn't seem to work with MWEs.
@@ -276,7 +277,7 @@ WordNet Browser Utilities.
 This provides a backend to both wxbrowse and browserver.py.
 """
 
-################################################################################
+##########################################################################
 #
 # Main logic for wordnet browser.
 #

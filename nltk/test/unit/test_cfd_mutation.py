@@ -10,7 +10,8 @@ class TestEmptyCondFreq(unittest.TestCase):
         empty = ConditionalFreqDist()
         self.assertEqual(empty.conditions(), [])
         with pytest.raises(ValueError):
-            empty.tabulate(conditions="BUG")  # nonexistent keys shouldn't be added
+            # nonexistent keys shouldn't be added
+            empty.tabulate(conditions="BUG")
         self.assertEqual(empty.conditions(), [])
 
     def test_plot(self):

@@ -91,7 +91,8 @@ class StanfordTokenizer(TokenizerI):
         # Configure java.
         config_java(options=self.java_options, verbose=verbose)
 
-        # Windows is incompatible with NamedTemporaryFile() without passing in delete=False.
+        # Windows is incompatible with NamedTemporaryFile() without passing in
+        # delete=False.
         with tempfile.NamedTemporaryFile(mode="wb", delete=False) as input_file:
             # Write the actual sentences to the temporary input file
             if isinstance(input_, str) and encoding:

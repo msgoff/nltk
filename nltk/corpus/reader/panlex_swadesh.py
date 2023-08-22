@@ -23,7 +23,8 @@ PanlexLanguage = namedtuple(
         "iso639_type",  # (3) ISO 639 language type, see README
         "script",  # (4) normal scripts of expressions
         "name",  # (5) PanLex default name
-        "langvar_uid",  # (6) UID of the language variety in which the default name is an expression
+        "langvar_uid",
+        # (6) UID of the language variety in which the default name is an expression
     ],
 )
 

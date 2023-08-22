@@ -73,7 +73,8 @@ class LinThesaurusCorpusReader(CorpusReader):
         :return: If fileid is specified, just the score for the two ngrams; otherwise,
                  list of tuples of fileids and scores.
         """
-        # Entries don't contain themselves, so make sure similarity between item and itself is 1.0
+        # Entries don't contain themselves, so make sure similarity between
+        # item and itself is 1.0
         if ngram1 == ngram2:
             if fileid:
                 return 1.0

@@ -37,7 +37,8 @@ class AveragedPerceptron:
     json_tag = "nltk.tag.perceptron.AveragedPerceptron"
 
     def __init__(self, weights=None):
-        # Each feature gets its own weight vector, so weights is a dict-of-dicts
+        # Each feature gets its own weight vector, so weights is a
+        # dict-of-dicts
         self.weights = weights if weights else {}
         self.classes = set()
         # The accumulated values, for the averaging. These will be keyed by
@@ -68,7 +69,7 @@ class AveragedPerceptron:
         # Do a secondary alphabetic sort, for stability
         best_label = max(self.classes, key=lambda label: (scores[label], label))
         # compute the confidence
-        conf = max(self._softmax(scores)) if return_conf == True else None
+        conf = max(self._softmax(scores)) if return_conf else None
 
         return best_label, conf
 
@@ -179,13 +180,11 @@ class PerceptronTagger(TaggerI):
 
         context = self.START + [self.normalize(w) for w in tokens] + self.END
         for i, word in enumerate(tokens):
-            tag, conf = (
-                (self.tagdict.get(word), 1.0) if use_tagdict == True else (None, None)
-            )
+            tag, conf = (self.tagdict.get(word), 1.0) if use_tagdict else (None, None)
             if not tag:
                 features = self._get_features(i, word, context, prev, prev2)
                 tag, conf = self.model.predict(features, return_conf)
-            output.append((word, tag, conf) if return_conf == True else (word, tag))
+            output.append((word, tag, conf) if return_conf else (word, tag))
 
             prev2 = prev
             prev = tag
@@ -240,7 +239,8 @@ class PerceptronTagger(TaggerI):
         # Pickle as a binary file
         if save_loc is not None:
             with open(save_loc, "wb") as fout:
-                # changed protocol from -1 to 2 to make pickling Python 2 compatible
+                # changed protocol from -1 to 2 to make pickling Python 2
+                # compatible
                 pickle.dump((self.model.weights, self.tagdict, self.classes), fout, 2)
 
     def load(self, loc):
@@ -291,7 +291,8 @@ class PerceptronTagger(TaggerI):
 
         i += len(self.START)
         features = defaultdict(int)
-        # It's useful to have a constant feature, which acts sort of like a prior
+        # It's useful to have a constant feature, which acts sort of like a
+        # prior
         add("bias")
         add("i suffix", word[-3:])
         add("i pref1", word[0] if word else "")

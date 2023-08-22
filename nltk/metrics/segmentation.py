@@ -107,7 +107,8 @@ def _ghd_aux(mat, rowv, colv, ins_cost, del_cost, shift_cost_coeff):
         for j, colj in enumerate(colv):
             shift_cost = shift_cost_coeff * abs(rowi - colj) + mat[i, j]
             if rowi == colj:
-                # boundaries are at the same location, no transformation required
+                # boundaries are at the same location, no transformation
+                # required
                 tcost = mat[i, j]
             elif rowi > colj:
                 # boundary match through a deletion

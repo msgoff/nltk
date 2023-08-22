@@ -29,10 +29,12 @@ NEXTPRIM_RE = re.compile(r"""([A-Za-z]+(?:\[[A-Za-z,]+\])?)(.*)""")
 # Separates the next application operator from the remainder
 APP_RE = re.compile(r"""([\\/])([.,]?)([.,]?)(.*)""")
 
-# Parses the definition of the right-hand side (rhs) of either a word or a family
+# Parses the definition of the right-hand side (rhs) of either a word or a
+# family
 LEX_RE = re.compile(r"""([\S_]+)\s*(::|[-=]+>)\s*(.+)""", re.UNICODE)
 
-# Parses the right hand side that contains category and maybe semantic predicate
+# Parses the right hand side that contains category and maybe semantic
+# predicate
 RHS_RE = re.compile(r"""([^{}]*[^ {}])\s*(\{[^}]+\})?""", re.UNICODE)
 
 # Parses the semantic predicate

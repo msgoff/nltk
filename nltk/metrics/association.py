@@ -15,10 +15,17 @@ import math as _math
 from abc import ABCMeta, abstractmethod
 from functools import reduce
 
-_log2 = lambda x: _math.log2(x)
+
+def _log2(x):
+    return _math.log2(x)
+
+
 _ln = _math.log
 
-_product = lambda s: reduce(lambda x, y: x * y, s)
+
+def _product(s):
+    return reduce(lambda x, y: x * y, s)
+
 
 _SMALL = 1e-20
 
@@ -30,7 +37,7 @@ except ImportError:
         raise NotImplementedError
 
 
-### Indices to marginals arguments:
+# Indices to marginals arguments:
 
 NGRAM = 0
 """Marginals index for the ngram count"""

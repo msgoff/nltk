@@ -157,7 +157,8 @@ def test_ribes():
 
 
 def test_no_zero_div():
-    # Regression test for Issue 2529, assure that no ZeroDivisionError is thrown.
+    # Regression test for Issue 2529, assure that no ZeroDivisionError is
+    # thrown.
     hyp1 = [
         "It",
         "is",

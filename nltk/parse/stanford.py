@@ -211,7 +211,8 @@ class GenericStanfordParser(ParserI):
             "-tokenizerMethod",
             "newCoreLabelTokenizerFactory",
         ]
-        # We don't need to escape slashes as "splitting is done on the last instance of the character in the token"
+        # We don't need to escape slashes as "splitting is done on the last
+        # instance of the character in the token"
         return self._parse_trees_output(
             self._execute(
                 cmd,
@@ -234,7 +235,8 @@ class GenericStanfordParser(ParserI):
         # Configure java.
         config_java(options=self.java_options, verbose=verbose)
 
-        # Windows is incompatible with NamedTemporaryFile() without passing in delete=False.
+        # Windows is incompatible with NamedTemporaryFile() without passing in
+        # delete=False.
         with tempfile.NamedTemporaryFile(mode="wb", delete=False) as input_file:
             # Write the actual sentences to the temporary input file
             if isinstance(input_, str) and encoding:

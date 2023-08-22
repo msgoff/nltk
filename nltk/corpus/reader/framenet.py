@@ -415,7 +415,8 @@ def _pretty_annotation(sent, aset_level=False):
             )
     outstr += "\n[text] + [Target] + [FE]"
     # POS-specific layers: syntactically important words that are neither the target
-    # nor the FEs. Include these along with the first FE layer but with '^' underlining.
+    # nor the FEs. Include these along with the first FE layer but with '^'
+    # underlining.
     for lyr in ("Verb", "Noun", "Adj", "Adv", "Prep", "Scon", "Art"):
         if lyr in sent and sent[lyr]:
             outstr += f" + [{lyr}]"
@@ -465,7 +466,9 @@ def _annotation_ascii_frames(sent):
                 if aset.status == "UNANN":
                     indexS += "!"  # warning indicator that there is a frame annotation but no FE annotation
                 if aset.LU.status == "Problem":
-                    indexS += "?"  # warning indicator that there is a missing LU definition (because the LU has Problem status)
+                    # warning indicator that there is a missing LU definition
+                    # (because the LU has Problem status)
+                    indexS += "?"
             overt.append((j, k, aset.LU.frame.name, indexS))
     overt = sorted(overt)
 
@@ -593,13 +596,14 @@ def _annotation_ascii_FEs(sent):
                     # (but do display the Gov)
                     continue
                 if any(1 for x, y, felbl in sent.FE[0] if x <= a < y or a <= x < b):
-                    # overlap between one of the POS-specific layers and first FE layer
+                    # overlap between one of the POS-specific layers and first
+                    # FE layer
                     posspec_separate = (
                         True  # show POS-specific layers on a separate line
                     )
-                posspec.append(
-                    (a, b, lbl.lower().replace("-", ""))
-                )  # lowercase Cop=>cop, Non-Asp=>nonasp, etc. to distinguish from FE names
+                # lowercase Cop=>cop, Non-Asp=>nonasp, etc. to distinguish from
+                # FE names
+                posspec.append((a, b, lbl.lower().replace("-", "")))
     if posspec_separate:
         POSSPEC = _annotation_ascii_FE_layer(posspec, {}, feAbbrevs)
     FE1 = _annotation_ascii_FE_layer(
@@ -1125,7 +1129,8 @@ class FramenetCorpusReader(XMLCorpusReader):
         self._lu_idx = None
         self._fulltext_idx = None
         self._semtypes = None
-        self._freltyp_idx = None  # frame relation types (Inheritance, Using, etc.)
+        # frame relation types (Inheritance, Using, etc.)
+        self._freltyp_idx = None
         self._frel_idx = None  # frame-to-frame relation instances
         self._ferel_idx = None  # FE-to-FE relation instances
         self._frel_f_idx = None  # frame-to-frame relations associated with each frame
@@ -1221,7 +1226,8 @@ warnings(True) to display corpus consistency warnings when loading data
         # this index should not be very large
         if not self._frel_idx:
             self._buildrelationindex()  # always load frame relations before frames,
-            # otherwise weird ordering effects might result in incomplete information
+            # otherwise weird ordering effects might result in incomplete
+            # information
         self._frame_idx = {}
         with XMLCorpusView(
             self.abspath("frameIndex.xml"), "frameIndex/frame", self._handle_elt
@@ -1471,7 +1477,8 @@ warnings(True) to display corpus consistency warnings when loading data
 
         fentry.URL = self._fnweb_url + "/" + self._frame_dir + "/" + fn_fname + ".xml"
 
-        # INFERENCE RULE: propagate lexical semtypes from the frame to all its LUs
+        # INFERENCE RULE: propagate lexical semtypes from the frame to all its
+        # LUs
         for st in fentry.semTypes:
             if st.rootType.name == "Lexical_type":
                 for lu in fentry.lexUnit.values():
@@ -1789,7 +1796,8 @@ warnings(True) to display corpus consistency warnings when loading data
             luinfo["frame"] = f
             self._lu_idx[fn_luid] = luinfo
         elif "_type" not in luinfo:
-            # we only have an index entry for the LU. loading the frame will replace this.
+            # we only have an index entry for the LU. loading the frame will
+            # replace this.
             f = self.frame_by_id(luinfo.frameID)
             luinfo = self._lu_idx[fn_luid]
         if ignorekeys:
@@ -1848,7 +1856,8 @@ warnings(True) to display corpus consistency warnings when loading data
                 self._semtypes[n] = i
                 self._semtypes[a] = i
                 self._semtypes[i] = st
-        # now that all individual semtype XML is loaded, we can link them together
+        # now that all individual semtype XML is loaded, we can link them
+        # together
         roots = []
         for st in self.semtypes():
             if st.superType:
@@ -2370,7 +2379,8 @@ warnings(True) to display corpus consistency warnings when loading data
         elif fe is not None and fe2 is not None:
             if not isinstance(fe2, str):
                 if isinstance(fe, str):
-                    # fe2 is specific to a particular frame. swap fe and fe2 so fe is always used to determine the frame.
+                    # fe2 is specific to a particular frame. swap fe and fe2 so
+                    # fe is always used to determine the frame.
                     fe, fe2 = fe2, fe
                 elif fe.frame is not fe2.frame:  # ensure frames match
                     raise FramenetError(
@@ -2697,7 +2707,7 @@ warnings(True) to display corpus consistency warnings when loading data
             return d
 
         # Ignore these attributes when loading attributes from an xml node
-        ignore_attrs = [  #'cBy', 'cDate', 'mDate', # <-- annotation metadata that could be of interest
+        ignore_attrs = [  # 'cBy', 'cDate', 'mDate', # <-- annotation metadata that could be of interest
             "xsi",
             "schemaLocation",
             "xmlns",
@@ -2967,7 +2977,8 @@ warnings(True) to display corpus consistency warnings when loading data
                                 info.text,
                             )
                             # this can happen in cases like "chemical and biological weapons"
-                            # being annotated as "chemical weapons" and "biological weapons"
+                            # being annotated as "chemical weapons" and
+                            # "biological weapons"
                         else:
                             target_spans.add(tspan)
                     info["targets"].append((a.Target, a.luName, a.frameName))
@@ -3207,7 +3218,8 @@ warnings(True) to display corpus consistency warnings when loading data
                             info["FE"] = (overt, ni)
                             # assert False,info
                         else:
-                            # sometimes there are 3 FE layers! e.g. Change_position_on_a_scale.fall.v
+                            # sometimes there are 3 FE layers! e.g.
+                            # Change_position_on_a_scale.fall.v
                             assert 2 <= l.rank <= 3, l.rank
                             k = "FE" + str(l.rank)
                             assert k not in info

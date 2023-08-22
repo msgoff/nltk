@@ -1198,7 +1198,8 @@ class DrsDrawer:
         :return: the bottom-rightmost point
         """
         if command == self._visit_command:
-            # if we don't need to draw the item, then we can use the cached values
+            # if we don't need to draw the item, then we can use the cached
+            # values
             try:
                 # attempt to retrieve cached values
                 right = expression._drawing_width + x
@@ -1282,7 +1283,8 @@ class DrsDrawer:
     def _handle_ApplicationExpression(self, expression, command, x, y):
         function, args = expression.uncurry()
         if not isinstance(function, DrtAbstractVariableExpression):
-            # It's not a predicate expression ("P(x,y)"), so leave arguments curried
+            # It's not a predicate expression ("P(x,y)"), so leave arguments
+            # curried
             function = expression.function
             args = [expression.argument]
 

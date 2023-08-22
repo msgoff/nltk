@@ -156,7 +156,8 @@ class CRFTagger(TaggerI):
                 " No model file is found !! Please use train or set_model_file function"
             )
 
-        # We need the list of sentences instead of the list generator for matching the input and output
+        # We need the list of sentences instead of the list generator for
+        # matching the input and output
         result = []
         for tokens in sents:
             features = [self._feature_func(tokens, i) for i in range(len(tokens))]

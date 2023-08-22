@@ -220,7 +220,8 @@ class DiscourseTester:
         :param consistchk: if ``True``, check that the result of adding the sentence is thread-consistent. Updates ``self._readings``.
 
         """
-        # check whether the new sentence is informative (i.e. not entailed by the previous discourse)
+        # check whether the new sentence is informative (i.e. not entailed by
+        # the previous discourse)
         if informchk:
             self.readings(verbose=False)
             for tid in sorted(self._threads):
@@ -328,7 +329,7 @@ class DiscourseTester:
             for sid in sorted(self._readings):
                 print()
                 print("%s readings:" % sid)
-                print()  #'-' * 30
+                print()  # '-' * 30
                 for rid in sorted(self._readings[sid]):
                     lf = self._readings[sid][rid]
                     print(f"{rid}: {lf.normalize()}")

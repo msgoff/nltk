@@ -296,7 +296,8 @@ class CCGChartParser(ParserI):
 
                     for left in chart.select(span=(lstart, mid)):
                         for right in chart.select(span=(mid, rend)):
-                            # Generate all possible combinations of the two edges
+                            # Generate all possible combinations of the two
+                            # edges
                             for rule in self._rules:
                                 edges_added_by_rule = 0
                                 for newedge in rule.apply(chart, lex, left, right):
@@ -433,7 +434,7 @@ def printCCGTree(lwidth, tree):
     return rwidth
 
 
-### Demonstration code
+# Demonstration code
 
 # Construct the lexicon
 lex = fromstring(

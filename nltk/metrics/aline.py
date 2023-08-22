@@ -1117,7 +1117,8 @@ def align(str1, str2, epsilon=0):
                 edit5 = -inf
             S[i, j] = max(edit1, edit2, edit3, edit4, edit5, 0)
 
-    T = (1 - epsilon) * np.amax(S)  # Threshold score for near-optimal alignments
+    # Threshold score for near-optimal alignments
+    T = (1 - epsilon) * np.amax(S)
 
     alignments = []
     for i in range(1, m + 1):

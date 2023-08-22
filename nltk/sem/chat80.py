@@ -390,7 +390,7 @@ def clause2concepts(filename, rel_name, schema, closures=[]):
     # add a unary concept corresponding to the set of entities
     # in the primary key position
     # relations in 'not_unary' are more like ordinary binary relations
-    if not filename in not_unary:
+    if filename not in not_unary:
         concepts.append(unary_concept(pkey, subj, records))
 
     # add a binary concept for each non-key field
@@ -644,15 +644,15 @@ def val_load(db):
 # """
 # Utility to filter out non-alphabetic constants.
 
-#:param str: candidate constant
-#:type str: string
-#:rtype: bool
+# :param str: candidate constant
+# :type str: string
+# :rtype: bool
 # """
 # try:
 # int(str)
 # return False
 # except ValueError:
-## some unknown values in records are labeled '?'
+# some unknown values in records are labeled '?'
 # if not str == '?':
 # return True
 

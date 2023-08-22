@@ -92,7 +92,7 @@ class TreePrettyPrinter:
                         for n, b in enumerate(a):
                             if not isinstance(b, Tree):
                                 a[n] = len(sentence)
-                                if type(b) == tuple:
+                                if isinstance(b, tuple):
                                     b = "/".join(b)
                                 sentence.append("%s" % b)
         self.nodes, self.coords, self.edges, self.highlight = self.nodecoords(
@@ -355,7 +355,7 @@ class TreePrettyPrinter:
         :param maxwidth: maximum number of characters before a label starts to
             wrap; pass None to disable.
         """
-        if abbreviate == True:
+        if abbreviate:
             abbreviate = 5
         if unicodelines:
             horzline = "\u2500"

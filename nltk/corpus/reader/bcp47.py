@@ -126,7 +126,7 @@ class BCP47CorpusReader(CorpusReader):
 
     def val2str(self, val):
         """Return only first value"""
-        if type(val) == list:
+        if isinstance(val, list):
             #            val = "/".join(val) # Concatenate all values
             val = val[0]
         return val
@@ -173,7 +173,8 @@ class BCP47CorpusReader(CorpusReader):
                         warn(note)
                         break
             if not found:
-                if subtag == "u" and subtags[0] == "sd":  # CLDR regional subdivisions
+                # CLDR regional subdivisions
+                if subtag == "u" and subtags[0] == "sd":
                     sd = subtags[1]
                     if sd in self.subdiv:
                         ext = self.subdiv[sd]
@@ -213,6 +214,6 @@ class BCP47CorpusReader(CorpusReader):
                 return val
         try:
             return self.lang2str(self.parse_tag(tag))
-        except:
+        except BaseException:
             warn(f"Tag {tag!r} was not recognized")
             return None

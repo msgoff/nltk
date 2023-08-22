@@ -218,11 +218,12 @@ class AlpinoCorpusReader(BracketParseCorpusReader):
         return t
 
     def _tag(self, t, tagset=None):
-        tagged_sent = [
-            (int(o), w, p)
-            for (o, p, w) in SORTTAGWRD.findall(self._normalize(t, ordered=True))
-        ]
-        tagged_sent.sort()
+        tagged_sent = sorted(
+            [
+                (int(o), w, p)
+                for (o, p, w) in SORTTAGWRD.findall(self._normalize(t, ordered=True))
+            ]
+        )
         if tagset and tagset != self._tagset:
             tagged_sent = [
                 (w, map_tag(self._tagset, tagset, p)) for (o, w, p) in tagged_sent

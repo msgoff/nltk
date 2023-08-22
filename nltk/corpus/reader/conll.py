@@ -462,7 +462,7 @@ class ConllSRLInstance:
 
     def __repr__(self):
         # Originally, its:
-        ##plural = 's' if len(self.arguments) != 1 else ''
+        # plural = 's' if len(self.arguments) != 1 else ''
         plural = "s" if len(self.arguments) != 1 else ""
         return "<ConllSRLInstance for %r with %d argument%s>" % (
             (self.verb_stem, len(self.arguments), plural)

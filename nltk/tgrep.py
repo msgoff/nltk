@@ -416,29 +416,37 @@ def _tgrep_relation_action(_s, _l, tokens):
         operator, predicate = tokens
         # A < B       A is the parent of (immediately dominates) B.
         if operator == "<":
-            retval = lambda n, m=None, l=None: (
-                _istree(n) and any(predicate(x, m, l) for x in n)
-            )
+
+            def retval(n, m=None, l=None):
+                return _istree(n) and any(predicate(x, m, l) for x in n)
+
         # A > B       A is the child of B.
         elif operator == ">":
-            retval = lambda n, m=None, l=None: (
-                hasattr(n, "parent")
-                and bool(n.parent())
-                and predicate(n.parent(), m, l)
-            )
+
+            def retval(n, m=None, l=None):
+                return (
+                    hasattr(n, "parent")
+                    and bool(n.parent())
+                    and predicate(n.parent(), m, l)
+                )
+
         # A <, B      Synonymous with A <1 B.
         elif operator == "<," or operator == "<1":
-            retval = lambda n, m=None, l=None: (
-                _istree(n) and bool(list(n)) and predicate(n[0], m, l)
-            )
+
+            def retval(n, m=None, l=None):
+                return _istree(n) and bool(list(n)) and predicate(n[0], m, l)
+
         # A >, B      Synonymous with A >1 B.
         elif operator == ">," or operator == ">1":
-            retval = lambda n, m=None, l=None: (
-                hasattr(n, "parent")
-                and bool(n.parent())
-                and (n is n.parent()[0])
-                and predicate(n.parent(), m, l)
-            )
+
+            def retval(n, m=None, l=None):
+                return (
+                    hasattr(n, "parent")
+                    and bool(n.parent())
+                    and (n is n.parent()[0])
+                    and predicate(n.parent(), m, l)
+                )
+
         # A <N B      B is the Nth child of A (the first child is <1).
         elif operator[0] == "<" and operator[1:].isdigit():
             idx = int(operator[1:])
@@ -467,18 +475,22 @@ def _tgrep_relation_action(_s, _l, tokens):
         # A <' B      B is the last child of A (also synonymous with A <-1 B).
         # A <- B      B is the last child of A (synonymous with A <-1 B).
         elif operator == "<'" or operator == "<-" or operator == "<-1":
-            retval = lambda n, m=None, l=None: (
-                _istree(n) and bool(list(n)) and predicate(n[-1], m, l)
-            )
+
+            def retval(n, m=None, l=None):
+                return _istree(n) and bool(list(n)) and predicate(n[-1], m, l)
+
         # A >' B      A is the last child of B (also synonymous with A >-1 B).
         # A >- B      A is the last child of B (synonymous with A >-1 B).
         elif operator == ">'" or operator == ">-" or operator == ">-1":
-            retval = lambda n, m=None, l=None: (
-                hasattr(n, "parent")
-                and bool(n.parent())
-                and (n is n.parent()[-1])
-                and predicate(n.parent(), m, l)
-            )
+
+            def retval(n, m=None, l=None):
+                return (
+                    hasattr(n, "parent")
+                    and bool(n.parent())
+                    and (n is n.parent()[-1])
+                    and predicate(n.parent(), m, l)
+                )
+
         # A <-N B 	  B is the N th-to-last child of A (the last child is <-1).
         elif operator[:2] == "<-" and operator[2:].isdigit():
             idx = -int(operator[2:])
@@ -506,117 +518,159 @@ def _tgrep_relation_action(_s, _l, tokens):
             )(idx)
         # A <: B      B is the only child of A
         elif operator == "<:":
-            retval = lambda n, m=None, l=None: (
-                _istree(n) and len(n) == 1 and predicate(n[0], m, l)
-            )
+
+            def retval(n, m=None, l=None):
+                return _istree(n) and len(n) == 1 and predicate(n[0], m, l)
+
         # A >: B      A is the only child of B.
         elif operator == ">:":
-            retval = lambda n, m=None, l=None: (
-                hasattr(n, "parent")
-                and bool(n.parent())
-                and len(n.parent()) == 1
-                and predicate(n.parent(), m, l)
-            )
+
+            def retval(n, m=None, l=None):
+                return (
+                    hasattr(n, "parent")
+                    and bool(n.parent())
+                    and len(n.parent()) == 1
+                    and predicate(n.parent(), m, l)
+                )
+
         # A << B      A dominates B (A is an ancestor of B).
         elif operator == "<<":
-            retval = lambda n, m=None, l=None: (
-                _istree(n) and any(predicate(x, m, l) for x in _descendants(n))
-            )
+
+            def retval(n, m=None, l=None):
+                return _istree(n) and any(predicate(x, m, l) for x in _descendants(n))
+
         # A >> B      A is dominated by B (A is a descendant of B).
         elif operator == ">>":
-            retval = lambda n, m=None, l=None: any(
-                predicate(x, m, l) for x in ancestors(n)
-            )
+
+            def retval(n, m=None, l=None):
+                return any(predicate(x, m, l) for x in ancestors(n))
+
         # A <<, B     B is a left-most descendant of A.
         elif operator == "<<," or operator == "<<1":
-            retval = lambda n, m=None, l=None: (
-                _istree(n) and any(predicate(x, m, l) for x in _leftmost_descendants(n))
-            )
+
+            def retval(n, m=None, l=None):
+                return _istree(n) and any(
+                    predicate(x, m, l) for x in _leftmost_descendants(n)
+                )
+
         # A >>, B     A is a left-most descendant of B.
         elif operator == ">>,":
-            retval = lambda n, m=None, l=None: any(
-                (predicate(x, m, l) and n in _leftmost_descendants(x))
-                for x in ancestors(n)
-            )
+
+            def retval(n, m=None, l=None):
+                return any(
+                    (predicate(x, m, l) and n in _leftmost_descendants(x))
+                    for x in ancestors(n)
+                )
+
         # A <<' B     B is a right-most descendant of A.
         elif operator == "<<'":
-            retval = lambda n, m=None, l=None: (
-                _istree(n)
-                and any(predicate(x, m, l) for x in _rightmost_descendants(n))
-            )
+
+            def retval(n, m=None, l=None):
+                return _istree(n) and any(
+                    predicate(x, m, l) for x in _rightmost_descendants(n)
+                )
+
         # A >>' B     A is a right-most descendant of B.
         elif operator == ">>'":
-            retval = lambda n, m=None, l=None: any(
-                (predicate(x, m, l) and n in _rightmost_descendants(x))
-                for x in ancestors(n)
-            )
+
+            def retval(n, m=None, l=None):
+                return any(
+                    (predicate(x, m, l) and n in _rightmost_descendants(x))
+                    for x in ancestors(n)
+                )
+
         # A <<: B     There is a single path of descent from A and B is on it.
         elif operator == "<<:":
-            retval = lambda n, m=None, l=None: (
-                _istree(n) and any(predicate(x, m, l) for x in _unique_descendants(n))
-            )
+
+            def retval(n, m=None, l=None):
+                return _istree(n) and any(
+                    predicate(x, m, l) for x in _unique_descendants(n)
+                )
+
         # A >>: B     There is a single path of descent from B and A is on it.
         elif operator == ">>:":
-            retval = lambda n, m=None, l=None: any(
-                predicate(x, m, l) for x in unique_ancestors(n)
-            )
+
+            def retval(n, m=None, l=None):
+                return any(predicate(x, m, l) for x in unique_ancestors(n))
+
         # A . B       A immediately precedes B.
         elif operator == ".":
-            retval = lambda n, m=None, l=None: any(
-                predicate(x, m, l) for x in _immediately_after(n)
-            )
+
+            def retval(n, m=None, l=None):
+                return any(predicate(x, m, l) for x in _immediately_after(n))
+
         # A , B       A immediately follows B.
         elif operator == ",":
-            retval = lambda n, m=None, l=None: any(
-                predicate(x, m, l) for x in _immediately_before(n)
-            )
+
+            def retval(n, m=None, l=None):
+                return any(predicate(x, m, l) for x in _immediately_before(n))
+
         # A .. B      A precedes B.
         elif operator == "..":
-            retval = lambda n, m=None, l=None: any(
-                predicate(x, m, l) for x in _after(n)
-            )
+
+            def retval(n, m=None, l=None):
+                return any(predicate(x, m, l) for x in _after(n))
+
         # A ,, B      A follows B.
         elif operator == ",,":
-            retval = lambda n, m=None, l=None: any(
-                predicate(x, m, l) for x in _before(n)
-            )
+
+            def retval(n, m=None, l=None):
+                return any(predicate(x, m, l) for x in _before(n))
+
         # A $ B       A is a sister of B (and A != B).
         elif operator == "$" or operator == "%":
-            retval = lambda n, m=None, l=None: (
-                hasattr(n, "parent")
-                and bool(n.parent())
-                and any(predicate(x, m, l) for x in n.parent() if x is not n)
-            )
+
+            def retval(n, m=None, l=None):
+                return (
+                    hasattr(n, "parent")
+                    and bool(n.parent())
+                    and any(predicate(x, m, l) for x in n.parent() if x is not n)
+                )
+
         # A $. B      A is a sister of and immediately precedes B.
         elif operator == "$." or operator == "%.":
-            retval = lambda n, m=None, l=None: (
-                hasattr(n, "right_sibling")
-                and bool(n.right_sibling())
-                and predicate(n.right_sibling(), m, l)
-            )
+
+            def retval(n, m=None, l=None):
+                return (
+                    hasattr(n, "right_sibling")
+                    and bool(n.right_sibling())
+                    and predicate(n.right_sibling(), m, l)
+                )
+
         # A $, B      A is a sister of and immediately follows B.
         elif operator == "$," or operator == "%,":
-            retval = lambda n, m=None, l=None: (
-                hasattr(n, "left_sibling")
-                and bool(n.left_sibling())
-                and predicate(n.left_sibling(), m, l)
-            )
+
+            def retval(n, m=None, l=None):
+                return (
+                    hasattr(n, "left_sibling")
+                    and bool(n.left_sibling())
+                    and predicate(n.left_sibling(), m, l)
+                )
+
         # A $.. B     A is a sister of and precedes B.
         elif operator == "$.." or operator == "%..":
-            retval = lambda n, m=None, l=None: (
-                hasattr(n, "parent")
-                and hasattr(n, "parent_index")
-                and bool(n.parent())
-                and any(predicate(x, m, l) for x in n.parent()[n.parent_index() + 1 :])
-            )
+
+            def retval(n, m=None, l=None):
+                return (
+                    hasattr(n, "parent")
+                    and hasattr(n, "parent_index")
+                    and bool(n.parent())
+                    and any(
+                        predicate(x, m, l) for x in n.parent()[n.parent_index() + 1 :]
+                    )
+                )
+
         # A $,, B     A is a sister of and follows B.
         elif operator == "$,," or operator == "%,,":
-            retval = lambda n, m=None, l=None: (
-                hasattr(n, "parent")
-                and hasattr(n, "parent_index")
-                and bool(n.parent())
-                and any(predicate(x, m, l) for x in n.parent()[: n.parent_index()])
-            )
+
+            def retval(n, m=None, l=None):
+                return (
+                    hasattr(n, "parent")
+                    and hasattr(n, "parent_index")
+                    and bool(n.parent())
+                    and any(predicate(x, m, l) for x in n.parent()[: n.parent_index()])
+                )
+
         else:
             raise TgrepException(f'cannot interpret tgrep operator "{operator}"')
     # now return the built function

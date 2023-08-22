@@ -129,7 +129,8 @@ def _pos_tag(tokens, tagset=None, tagger=None, lang=None):
                 ]
             elif lang == "rus":
                 # Note that the new Russian pos tags from the model contains suffixes,
-                # see https://github.com/nltk/nltk/issues/2151#issuecomment-430709018
+                # see
+                # https://github.com/nltk/nltk/issues/2151#issuecomment-430709018
                 tagged_tokens = [
                     (token, map_tag("ru-rnc-new", tagset, tag.partition("=")[0]))
                     for (token, tag) in tagged_tokens

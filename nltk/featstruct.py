@@ -147,9 +147,9 @@ class FeatStruct(SubstituteBindingsI):
        un-set; and no further modification should be made to this
        feature structure."""
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { Constructor
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     def __new__(cls, features=None, **morefeatures):
         """
@@ -196,9 +196,9 @@ class FeatStruct(SubstituteBindingsI):
         else:
             return super().__new__(cls, features, **morefeatures)
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { Uniform Accessor Methods
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # These helper functions allow the methods defined by FeatStruct
     # to treat all feature structures as mappings, even if they're
     # really lists.  (Lists are treated as mappings from ints to vals)
@@ -219,9 +219,9 @@ class FeatStruct(SubstituteBindingsI):
         value, for all features defined by this FeatStruct."""
         raise NotImplementedError()  # Implemented by subclasses.
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { Equality & Hashing
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     def equal_values(self, other, check_reentrance=False):
         """
@@ -371,9 +371,9 @@ class FeatStruct(SubstituteBindingsI):
             hashval = int(hashval & 0x7FFFFFFF)
         return hashval
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { Freezing
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     #: Error message used by mutating methods when called on a frozen
     #: feature structure.
@@ -415,9 +415,9 @@ class FeatStruct(SubstituteBindingsI):
             if isinstance(fval, FeatStruct):
                 fval._freeze(visited)
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { Copying
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     def copy(self, deep=True):
         """
@@ -436,9 +436,9 @@ class FeatStruct(SubstituteBindingsI):
     def __deepcopy__(self, memo):
         raise NotImplementedError()  # Implemented by subclasses.
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { Structural Information
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     def cyclic(self):
         """
@@ -496,9 +496,9 @@ class FeatStruct(SubstituteBindingsI):
 
         return reentrances
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { Variables & Bindings
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     def substitute_bindings(self, bindings):
         """:see: ``nltk.featstruct.substitute_bindings()``"""
@@ -525,9 +525,9 @@ class FeatStruct(SubstituteBindingsI):
         """
         return remove_variables(self)
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { Unification
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     def unify(self, other, bindings=None, trace=False, fail=None, rename_vars=True):
         return unify(self, other, bindings, trace, fail, rename_vars)
@@ -540,9 +540,9 @@ class FeatStruct(SubstituteBindingsI):
         """
         return subsumes(self, other)
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { String Representations
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     def __repr__(self):
         """
@@ -740,9 +740,9 @@ class FeatDict(FeatStruct, dict):
                 raise TypeError("Feature names must be strings")
             self[key] = val
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { Copying
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     def __deepcopy__(self, memo):
         memo[id(self)] = selfcopy = self.__class__()
@@ -750,9 +750,9 @@ class FeatDict(FeatStruct, dict):
             selfcopy[copy.deepcopy(key, memo)] = copy.deepcopy(val, memo)
         return selfcopy
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { Uniform Accessor Methods
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     def _keys(self):
         return self.keys()
@@ -763,9 +763,9 @@ class FeatDict(FeatStruct, dict):
     def _items(self):
         return self.items()
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { String Representations
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     def __str__(self):
         """
@@ -1019,18 +1019,18 @@ class FeatList(FeatStruct, list):
     reverse = _check_frozen(list.reverse)
     sort = _check_frozen(list.sort)
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { Copying
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     def __deepcopy__(self, memo):
         memo[id(self)] = selfcopy = self.__class__()
         selfcopy.extend(copy.deepcopy(fval, memo) for fval in self)
         return selfcopy
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { Uniform Accessor Methods
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     def _keys(self):
         return list(range(len(self)))
@@ -1041,9 +1041,9 @@ class FeatList(FeatStruct, list):
     def _items(self):
         return enumerate(self)
 
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
     # { String Representations
-    ##////////////////////////////////////////////////////////////
+    # ////////////////////////////////////////////////////////////
 
     # Special handling for: reentrances, variables, expressions.
     def _repr(self, reentrances, reentrance_ids):
@@ -2419,7 +2419,7 @@ class FeatStructReader:
             name = self._slash_feature
             v, pos = self._read_value(name, s, match.end(), reentrances)
             fstruct[name] = v
-        ## Add any default features.  -- handle in unficiation instead?
+        # Add any default features.  -- handle in unficiation instead?
         # for feature in self._features_with_defaults:
         #    fstruct.setdefault(feature, feature.default)
         # Return the value.
@@ -2478,7 +2478,8 @@ class FeatStructReader:
             re.compile(r"<(app)\((\?[a-z][a-z]*)\s*," r"\s*(\?[a-z][a-z]*)\)>"),
         ),
         #       ('read_logic_value', re.compile(r'<([^>]*)>')),
-        # lazily match any character after '<' until we hit a '>' not preceded by '-'
+        # lazily match any character after '<' until we hit a '>' not preceded
+        # by '-'
         ("read_logic_value", re.compile(r"<(.*?)(?<!-)>")),
         ("read_set_value", re.compile(r"{")),
         ("read_tuple_value", re.compile(r"\(")),
@@ -2700,7 +2701,7 @@ def interactive_demo(trace=False):
                     num = int(input) - 1
                     selected[i] = all_fstructs[num][1]
                     print()
-                except:
+                except BaseException:
                     print("Bad sentence number")
                     continue
 

@@ -30,9 +30,9 @@ argument beam_size.  If non-zero, this controls the size of the beam
 (aka the edge queue).  This option is most useful with InsideChartParser.
 """
 
-##//////////////////////////////////////////////////////
-##  Bottom-Up PCFG Chart Parser
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Bottom-Up PCFG Chart Parser
+# //////////////////////////////////////////////////////
 
 # [XX] This might not be implemented quite right -- it would be better
 # to associate probabilities with child pointer lists.
@@ -422,9 +422,9 @@ class LongestChartParser(BottomUpProbabilisticChartParser):
         queue.sort(key=lambda edge: edge.length())
 
 
-##//////////////////////////////////////////////////////
-##  Test Code
-##//////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////
+# Test Code
+# //////////////////////////////////////////////////////
 
 
 def demo(choice=None, draw_parses=None, print_parses=None):
@@ -498,7 +498,7 @@ def demo(choice=None, draw_parses=None, print_parses=None):
         choice = int(sys.stdin.readline().strip()) - 1
     try:
         sent, grammar = demos[choice]
-    except:
+    except BaseException:
         print("Bad sentence number")
         return
 
@@ -511,7 +511,8 @@ def demo(choice=None, draw_parses=None, print_parses=None):
         pchart.RandomChartParser(grammar),
         pchart.UnsortedChartParser(grammar),
         pchart.LongestChartParser(grammar),
-        pchart.InsideChartParser(grammar, beam_size=len(tokens) + 1),  # was BeamParser
+        pchart.InsideChartParser(grammar, beam_size=len(tokens) + 1),
+        # was BeamParser
     ]
 
     # Run the parsers on the tokenized sentence.

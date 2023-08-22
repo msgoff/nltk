@@ -331,7 +331,8 @@ class TestTokenize:
         Test a string that resembles a phone number but contains a newline
         """
 
-        # Should be recognized as a phone number, albeit one with multiple spaces
+        # Should be recognized as a phone number, albeit one with multiple
+        # spaces
         tokenizer = TweetTokenizer()
         test1 = "(393)  928 -3010"
         expected = ["(393)  928 -3010"]
@@ -351,13 +352,15 @@ class TestTokenize:
         """
         tokenizer = TweetTokenizer()
 
-        # A Emoji ZWJ Sequences, they together build as a single emoji, should not be split.
+        # A Emoji ZWJ Sequences, they together build as a single emoji, should
+        # not be split.
         test1 = "👨‍👩‍👧‍👧"
         expected = ["👨‍👩‍👧‍👧"]
         result = tokenizer.tokenize(test1)
         assert result == expected
 
-        # A Emoji with skin tone modifier, the two characters build a single emoji, should not be split.
+        # A Emoji with skin tone modifier, the two characters build a single
+        # emoji, should not be split.
         test2 = "👨🏿"
         expected = ["👨🏿"]
         result = tokenizer.tokenize(test2)
@@ -768,13 +771,15 @@ class TestTokenize:
         list(obj._tokenize_words("test"))
 
     def test_punkt_tokenize_custom_lang_vars(self):
-        # Create LangVars including a full stop end character as used in Bengali
+        # Create LangVars including a full stop end character as used in
+        # Bengali
         class BengaliLanguageVars(punkt.PunktLanguageVars):
             sent_end_chars = (".", "?", "!", "\u0964")
 
         obj = punkt.PunktSentenceTokenizer(lang_vars=BengaliLanguageVars())
 
-        # We now expect these sentences to be split up into the individual sentences
+        # We now expect these sentences to be split up into the individual
+        # sentences
         sentences = "উপরাষ্ট্রপতি শ্রী এম ভেঙ্কাইয়া নাইডু সোমবার আই আই টি দিল্লির হীরক জয়ন্তী উদযাপনের উদ্বোধন করেছেন। অনলাইনের মাধ্যমে এই অনুষ্ঠানে কেন্দ্রীয় মানব সম্পদ উন্নয়নমন্ত্রী শ্রী রমেশ পোখরিয়াল ‘নিশাঙ্ক’  উপস্থিত ছিলেন। এই উপলক্ষ্যে উপরাষ্ট্রপতি হীরকজয়ন্তীর লোগো এবং ২০৩০-এর জন্য প্রতিষ্ঠানের লক্ষ্য ও পরিকল্পনার নথি প্রকাশ করেছেন।"
         expected = [
             "উপরাষ্ট্রপতি শ্রী এম ভেঙ্কাইয়া নাইডু সোমবার আই আই টি দিল্লির হীরক জয়ন্তী উদযাপনের উদ্বোধন করেছেন।",
@@ -787,7 +792,8 @@ class TestTokenize:
     def test_punkt_tokenize_no_custom_lang_vars(self):
         obj = punkt.PunktSentenceTokenizer()
 
-        # We expect these sentences to not be split properly, as the Bengali full stop '।' is not included in the default language vars
+        # We expect these sentences to not be split properly, as the Bengali
+        # full stop '।' is not included in the default language vars
         sentences = "উপরাষ্ট্রপতি শ্রী এম ভেঙ্কাইয়া নাইডু সোমবার আই আই টি দিল্লির হীরক জয়ন্তী উদযাপনের উদ্বোধন করেছেন। অনলাইনের মাধ্যমে এই অনুষ্ঠানে কেন্দ্রীয় মানব সম্পদ উন্নয়নমন্ত্রী শ্রী রমেশ পোখরিয়াল ‘নিশাঙ্ক’  উপস্থিত ছিলেন। এই উপলক্ষ্যে উপরাষ্ট্রপতি হীরকজয়ন্তীর লোগো এবং ২০৩০-এর জন্য প্রতিষ্ঠানের লক্ষ্য ও পরিকল্পনার নথি প্রকাশ করেছেন।"
         expected = [
             "উপরাষ্ট্রপতি শ্রী এম ভেঙ্কাইয়া নাইডু সোমবার আই আই টি দিল্লির হীরক জয়ন্তী উদযাপনের উদ্বোধন করেছেন। অনলাইনের মাধ্যমে এই অনুষ্ঠানে কেন্দ্রীয় মানব সম্পদ উন্নয়নমন্ত্রী শ্রী রমেশ পোখরিয়াল ‘নিশাঙ্ক’  উপস্থিত ছিলেন। এই উপলক্ষ্যে উপরাষ্ট্রপতি হীরকজয়ন্তীর লোগো এবং ২০৩০-এর জন্য প্রতিষ্ঠানের লক্ষ্য ও পরিকল্পনার নথি প্রকাশ করেছেন।"
@@ -798,11 +804,13 @@ class TestTokenize:
     @pytest.mark.parametrize(
         "input_text,n_sents,n_splits,lang_vars",
         [
-            # Test debug_decisions on a text with two sentences, split by a dot.
+            # Test debug_decisions on a text with two sentences, split by a
+            # dot.
             ("Subject: Some subject. Attachments: Some attachments", 2, 1),
             # The sentence should be split into two sections,
             # with one split and hence one decision.
-            # Test debug_decisions on a text with two sentences, split by an exclamation mark.
+            # Test debug_decisions on a text with two sentences, split by an
+            # exclamation mark.
             ("Subject: Some subject! Attachments: Some attachments", 2, 1),
             # The sentence should be split into two sections,
             # with one split and hence one decision.
@@ -814,7 +822,7 @@ class TestTokenize:
     )
     def punkt_debug_decisions(self, input_text, n_sents, n_splits, lang_vars=None):
         tokenizer = punkt.PunktSentenceTokenizer()
-        if lang_vars != None:
+        if lang_vars is not None:
             tokenizer._lang_vars = lang_vars
 
         assert len(tokenizer.tokenize(input_text)) == n_sents

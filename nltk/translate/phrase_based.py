@@ -168,7 +168,7 @@ def phrase_extraction(srctext, trgtext, alignment, max_phrase_length=0):
             # // find the minimally matching foreign phrase
             # (f start , f end ) = ( length(f), 0 )
             # f_start ∈ [0, len(f) - 1]; f_end ∈ [0, len(f) - 1]
-            f_start, f_end = trglen - 1, -1  #  0-based indexing
+            f_start, f_end = trglen - 1, -1  # 0-based indexing
 
             for e, f in alignment:
                 if e_start <= e <= e_end:

@@ -127,7 +127,8 @@ class HunposTagger(TaggerI):
             if isinstance(token, str):
                 token = token.encode(self._encoding)
             self._hunpos.stdin.write(token + b"\n")
-        # We write a final empty line to tell hunpos that the sentence is finished:
+        # We write a final empty line to tell hunpos that the sentence is
+        # finished:
         self._hunpos.stdin.write(b"\n")
         self._hunpos.stdin.flush()
 

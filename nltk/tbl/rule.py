@@ -204,7 +204,8 @@ class Rule(TagRule):
                 repr(self.original_tag),
                 repr(self.replacement_tag),
                 # list(self._conditions) would be simpler but will not generate
-                # the same Rule.__repr__ in python 2 and 3 and thus break some tests
+                # the same Rule.__repr__ in python 2 and 3 and thus break some
+                # tests
                 ", ".join(f"({f},{repr(v)})" for (f, v) in self._conditions),
             )
 

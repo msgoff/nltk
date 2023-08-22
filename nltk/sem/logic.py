@@ -1676,7 +1676,8 @@ class VariableBinderExpression(Expression):
             if self.variable == other.variable:
                 return self.term == other.term
             else:
-                # Comparing \x.M  and \y.N.  Relabel y in N with x and continue.
+                # Comparing \x.M  and \y.N.  Relabel y in N with x and
+                # continue.
                 varex = VariableExpression(self.variable)
                 return self.term == other.term.replace(other.variable, varex)
         else:
@@ -1929,7 +1930,7 @@ class EqualityExpression(BinaryExpression):
         return Tokens.EQ
 
 
-### Utilities
+# Utilities
 
 
 class LogicalExpressionException(Exception):

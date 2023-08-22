@@ -207,10 +207,9 @@ class TestHypothesis(unittest.TestCase):
 
     def test_translated_positions(self):
         # act
-        translated_positions = self.hypothesis_chain.translated_positions()
+        translated_positions = sorted(self.hypothesis_chain.translated_positions())
 
         # assert
-        translated_positions.sort()
         self.assertEqual(translated_positions, [1, 3, 4, 5, 6])
 
     def test_untranslated_spans(self):
