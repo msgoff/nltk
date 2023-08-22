@@ -15,9 +15,12 @@ parser ``nltk.chunk.RegexpChunkParser``.
 # configuration parameters to select what's being chunked (eg VP vs NP)
 # and what part of the data is being used as the development set.
 
-import random
+# unused ?
+# import random
 import re
-import textwrap
+
+# unused ?
+# import textwrap
 import time
 from tkinter import (
     Button,
@@ -216,16 +219,16 @@ class RegexpChunkApp:
     ]
 
     HELP_AUTOTAG = [
-        ("red", dict(foreground="#a00")),
-        ("green", dict(foreground="#080")),
-        ("highlight", dict(background="#ddd")),
-        ("underline", dict(underline=True)),
-        ("h1", dict(underline=True)),
-        ("indent", dict(lmargin1=20, lmargin2=20)),
-        ("hangindent", dict(lmargin1=0, lmargin2=60)),
-        ("var", dict(foreground="#88f")),
-        ("regexp", dict(foreground="#ba7")),
-        ("match", dict(foreground="#6a6")),
+        ("red", {"foreground": "#a00"}),
+        ("green", {"foreground": "#080"}),
+        ("highlight", {"background": "#ddd"}),
+        ("underline", {"underline": True}),
+        ("h1", {"underline": True}),
+        ("indent", {"lmargin1": 20, "lmargin2": 20}),
+        ("hangindent", {"lmargin1": 0, "lmargin2": 60}),
+        ("var", {"foreground": "#88f"}),
+        ("regexp", {"foreground": "#ba7"}),
+        ("match", {"foreground": "#6a6"}),
     ]
 
     ##/////////////////////////////////////////////////////////////////
@@ -286,15 +289,15 @@ class RegexpChunkApp:
     _STATUS_PARAMS = dict(background="#9bb", relief="groove", border=2)
     _FONT_PARAMS = dict(family="helvetica", size=-20)
     _FRAME_PARAMS = dict(background="#777", padx=2, pady=2, border=3)
-    _EVALBOX_PARAMS = dict(
-        background="#eef",
-        highlightbackground="#eef",
-        highlightthickness=1,
-        relief="groove",
-        border=2,
-        width=300,
-        height=280,
-    )
+    _EVALBOX_PARAMS = {
+        "background": "#eef",
+        "highlightbackground": "#eef",
+        "highlightthickness": 1,
+        "relief": "groove",
+        "border": 2,
+        "width": 300,
+        "height": 280,
+    }
     _BUTTON_PARAMS = dict(
         background="#777", activebackground="#777", highlightbackground="#777"
     )
